@@ -91,16 +91,11 @@ export const projectType = {
 
       of: [
         {
-          type: "image",
-
-          options: {
-            hotspot: true,
-          },
+          type: "cloudinaryImage",
         },
       ],
 
-      validation: (Rule) =>
-        Rule.min(1).error("At least one image is required"),
+      validation: (Rule) => Rule.min(1).error("At least one image is required"),
     },
   ],
 };

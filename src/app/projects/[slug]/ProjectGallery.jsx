@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { getOptimizedImageUrl } from "@/utils/cloudinary";
 
 export default function ProjectGallery({
   images,
@@ -81,7 +82,10 @@ const handleTouchEnd = (e) => {
 
           <img
           loading="lazy"
-            src={images?.[selectedImage]?.asset.url}
+            src={getOptimizedImageUrl(
+  images?.[selectedImage]?.publicId,
+  1600
+)}
             alt={projectName}
             onClick={() => {
   if (images?.[selectedImage]?.asset?.url) {
@@ -252,7 +256,10 @@ lg:h-[120px]
             >
 
               <img
-                src={image.asset.url}
+                src={getOptimizedImageUrl(
+  image.publicId,
+  500
+)}
                 alt={projectName}
                 className="
                   w-full
@@ -349,7 +356,10 @@ lg:h-[120px]
 
   <img
   loading="lazy"
-    src={images?.[selectedImage]?.asset.url}
+    src={getOptimizedImageUrl(
+  images?.[selectedImage]?.publicId,
+  2000
+)}
     alt={projectName}
     className="
       max-w-[92vw]

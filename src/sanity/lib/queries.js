@@ -1,5 +1,3 @@
-//src/sanity/lib/queries.js
-
 import { groq } from "next-sanity";
 
 export const allProjectsQuery = groq`
@@ -16,9 +14,8 @@ export const allProjectsQuery = groq`
     videoUrl,
 
     galleryImages[]{
-      asset->{
-        url
-      }
+      imageUrl,
+      publicId
     }
   }
 `;
@@ -37,9 +34,8 @@ export const singleProjectQuery = groq`
     videoUrl,
 
     galleryImages[]{
-      asset->{
-        url
-      }
+      imageUrl,
+      publicId
     }
   }
 `;

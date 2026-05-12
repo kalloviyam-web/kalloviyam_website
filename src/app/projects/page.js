@@ -5,6 +5,7 @@ import { MapPin } from "lucide-react";
 
 import { client } from "@/sanity/lib/client";
 import { allProjectsQuery } from "@/sanity/lib/queries";
+import { getOptimizedImageUrl } from "@/utils/cloudinary";
 
 export const revalidate = 30;
 
@@ -151,7 +152,10 @@ export default async function ProjectsPage() {
                   )}
                   {/* Image */}
                   <img
-                    src={project.galleryImages?.[0]?.asset?.url}
+                    src={getOptimizedImageUrl(
+  project.galleryImages?.[0]?.publicId,
+  900
+)}
                     alt={project.projectName}
                     className="
                       w-full

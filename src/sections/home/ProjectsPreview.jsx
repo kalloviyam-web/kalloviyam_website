@@ -1,4 +1,7 @@
+//src/sections/home/ProjectsPreview.jsx
 import Link from "next/link";
+
+import { getOptimizedImageUrl } from "@/utils/cloudinary";
 
 import { MapPin } from "lucide-react";
 
@@ -189,7 +192,10 @@ lg:mb-14
                   )}
 
                   <img
-                    src={project.galleryImages?.[0]?.asset?.url}
+                    src={getOptimizedImageUrl(
+  project.galleryImages?.[0]?.publicId,
+  900
+)}
                     alt={project.projectName}
                     className="
                       w-full
@@ -211,7 +217,7 @@ lg:mb-14
 
                   <h3
                     className="
-                      text-[24px]
+                      text-[20px]
 
                       font-semibold
 
