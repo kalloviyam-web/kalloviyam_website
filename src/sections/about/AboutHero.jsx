@@ -150,7 +150,7 @@ md:pb-28
     bg-[#C8862B]
     hover:bg-[#A96E1F]
 
-    text-white
+    
     font-semibold
     text-[15px]
 
@@ -161,6 +161,9 @@ md:pb-28
     transition-all
     duration-300
   "
+  style={{
+    color: "#FFFFFF",
+  }}
 >
   View Our Work →
 </Link>

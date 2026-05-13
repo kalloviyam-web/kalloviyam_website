@@ -123,7 +123,7 @@ export default function ServicesHero() {
     bg-[#C8862B]
     hover:bg-[#A96E1F]
 
-    text-white
+    
     font-medium
 
     inline-flex
@@ -133,6 +133,9 @@ export default function ServicesHero() {
     transition-all
     duration-300
   "
+  style={{
+    color: "#FFFFFF",
+  }}
 >
   View Our Work →
 </Link>
