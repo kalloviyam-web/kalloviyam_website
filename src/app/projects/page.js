@@ -1,7 +1,6 @@
 //src/app/projects/page.js
 
 import Link from "next/link";
-import { MapPin } from "lucide-react";
 
 import { client } from "@/sanity/lib/client";
 import { allProjectsQuery } from "@/sanity/lib/queries";
@@ -15,307 +14,221 @@ export default async function ProjectsPage() {
   return (
     <section
       className="
-        bg-[#F5F5F5]
+        bg-[#F8F7F4]
+
         min-h-screen
 
         pt-[95px]
         sm:pt-[100px]
         md:pt-[110px]
 
-        pb-16
-        md:pb-24
+        pb-10
+        md:pb-16
       "
     >
-      <div className="container">
-        {/* Heading */}
-        <div
-          className="
-            flex
-            flex-col
-            items-center
-            text-center
+      <div
+        className="
+    w-full
 
-            mb-8
-            md:mb-10
-          "
-        >
-          <h1
-            className="
-              text-[34px]
-              sm:text-[40px]
-              md:text-[52px]
-
-              font-semibold
-
-              text-[#9A5C01]
-
-              leading-tight
-            "
-          >
-            Our Projects
-          </h1>
-
-          <p
-            className="
-              mt-4
-
-              text-[13px]
-              sm:text-[14px]
-              md:text-[15px]
-
-              text-[#E78300]
-
-              max-w-[760px]
-
-              leading-7
-
-              px-4
-            "
-          >
-            Experience a curated selection of the world’s most architectural
-            masterpieces.
-          </p>
-        </div>
-
-        {/* Projects Grid */}
+    px-5
+    sm:px-5
+    lg:px-10
+  "
+      >
+        {/* PROJECTS GRID */}
         <div
           className="
             grid
             grid-cols-1
-            md:grid-cols-2
-            xl:grid-cols-3
+            sm:grid-cols-2
+            lg:grid-cols-4
 
-            gap-8
-            lg:gap-10
+            gap-3
+            sm:gap-4
+            lg:gap-4
 
-            justify-items-center
+            overflow-hidden
+
+            mt-2
+            sm:mt-4
           "
         >
           {projects.map((project) => (
             <Link
               key={project._id}
               href={`/projects/${project.slug.current}`}
-              className="group block w-full max-w-[485px]"
-            >
-              <article
-                className="
-                  bg-white
+              className="
+                group
+                relative
 
-                  rounded-[16px]
+                block
+
+                overflow-hidden
+
+                bg-black
+              "
+            >
+              {/* IMAGE */}
+              <div
+                className="
+                  relative
+
+                  aspect-[5/4]
 
                   overflow-hidden
-
-                  border
-                  border-[#ECECEC]
-
-                  shadow-[0_8px_30px_rgba(0,0,0,0.06)]
-
-                  transition-all
-                  duration-500
-
-                  hover:-translate-y-2
-                  hover:shadow-[0_20px_45px_rgba(0,0,0,0.10)]
                 "
               >
-                {/* Image Section */}
-                <div className="relative overflow-hidden">
-                  {/* NEW LISTING Badge */}
-                  {project.listingType === "new" && (
-                    <div
-                      className="
-      absolute
-      top-5
-      right-5
-      z-20
-
-      bg-[#D57F00]
-
-      text-white
-
-      px-6
-      py-[7px]
-
-      rounded-full
-
-      text-[11px]
-      font-medium
-
-      tracking-[0.5px]
-
-      font-['Inter']
-
-      shadow-[0_6px_16px_rgba(0,0,0,0.18)]
-    "
-                    >
-                      NEW LISTING
-                    </div>
+                <img
+                  src={getOptimizedImageUrl(
+                    project.galleryImages?.[0]?.publicId,
+                    1200,
                   )}
-                  {/* Image */}
-                  <img
-                    src={getOptimizedImageUrl(
-  project.galleryImages?.[0]?.publicId,
-  900
-)}
-                    alt={project.projectName}
-                    className="
-                      w-full
-                      h-[340px]
+                  alt={project.projectName}
+                  className="
+                    w-full
+                    h-full
 
-                      object-cover
+                    object-cover
 
-                      transition-transform
-                      duration-700
+                    transition-all
+                    duration-[1600ms]
 
-                      group-hover:scale-105
-                    "
-                  />
-                </div>
+                    ease-out
 
-                {/* Content */}
+                    group-hover:scale-110
+                  "
+                />
+
+                {/* DARK OVERLAY */}
                 <div
                   className="
-                    px-5
-                    pt-3
-                    pb-6
+                    absolute
+                    inset-0
+
+                    bg-black/35
+
+                    group-hover:bg-black/45
+
+                    transition-all
+                    duration-700
+                  "
+                />
+
+                {/* CONTENT */}
+                <div
+                  className="
+                    absolute
+                    inset-0
+
+                    flex
+                    flex-col
+                    justify-end
+
+                    p-5
+                    sm:p-6
                   "
                 >
-                  {/* Project Name */}
+                  {/* PROJECT NAME */}
                   <h2
                     className="
+                      text-white
+
                       text-[20px]
-                      md:text-[24px]
+                      sm:text-[21px]
 
-                      leading-tight
+                      leading-[1.15]
 
-                      text-[#1C1B1B]
+                      font-[400]
 
-                      font-semibold
+                      tracking-[1px]
 
-                      font-['Manrope']
+                      transition-all
+                      duration-700
+
+                      lg:group-hover:-translate-y-6
                     "
+                    style={{
+                      fontFamily: "serif",
+                    }}
                   >
                     {project.projectName}
                   </h2>
 
-                  {/* Location */}
+                  {/* DESKTOP HOVER DETAILS */}
                   <div
                     className="
-                      flex
-                      items-center
-                      gap-2
+    hidden
+    lg:block
 
-                      mt-2
+    absolute
+    left-6
+    bottom-6
 
-                      text-[#444748]
+    pointer-events-none
+
+    overflow-hidden
+  "
+                  >
+                    <div
+                      className="
+      translate-y-6
+      opacity-0
+
+      group-hover:translate-y-0
+      group-hover:opacity-100
+
+      transition-all
+      duration-700
+
+      ease-out
+    "
+                    >
+                      {/* LOCATION */}
+                      <p
+                        className="
+        text-white/75
+
+        uppercase
+
+        tracking-[3px]
+
+        text-[10px]
+
+        font-medium
+      "
+                      >
+                        {project.projectLocation}
+                      </p>
+                    </div>
+                  </div>
+                  {/* MOBILE DETAILS */}
+                  <div
+                    className="
+                      mt-3
+
+                      lg:hidden
                     "
                   >
-                    <MapPin size={16} />
-
                     <p
                       className="
-                        text-[16px]
+                        text-white/75
+
+                        uppercase
+
+                        tracking-[2px]
+
+                        text-[10px]
 
                         font-medium
 
-                        font-['Work_Sans']
+                        mb-2
                       "
                     >
                       {project.projectLocation}
                     </p>
                   </div>
-
-                  {/* Features */}
-                  <div
-                    className="
-                      flex
-                      items-center
-                      gap-4
-                      flex-wrap
-
-                      mt-3
-                    "
-                  >
-                    {/* BHK */}
-                    <div
-                      className="
-                        flex
-                        items-center
-                        gap-2
-
-                        px-4
-                        py-2
-
-                        bg-white
-
-                        rounded-full
-
-                        shadow-[0_2px_10px_rgba(0,0,0,0.10)]
-
-                        text-[#565656]
-
-                        text-[14px]
-                        font-medium
-                      "
-                    >
-                      🏠 {project.bhk}
-                    </div>
-
-                    {/* Sq.ft */}
-                    <div
-                      className="
-                        flex
-                        items-center
-                        gap-2
-
-                        px-4
-                        py-2
-
-                        bg-white
-
-                        rounded-full
-
-                        shadow-[0_2px_10px_rgba(0,0,0,0.10)]
-
-                        text-[#565656]
-
-                        text-[14px]
-                        font-medium
-                      "
-                    >
-                      📐 {project.sqft}
-                    </div>
-                  </div>
-
-                  {/* Button */}
-                  <button
-                    className="
-                      w-full
-
-                      mt-6
-
-                      py-2
-
-                      bg-[#DF9C43]
-
-                      text-white
-
-                      text-[15px]
-                      font-medium
-
-                      tracking-[1px]
-
-                      uppercase
-
-                      transition-all
-                      duration-300
-
-                      hover:bg-[#C9872C]
-                    "
-                  >
-                    View Details
-                  </button>
                 </div>
-              </article>
+              </div>
             </Link>
           ))}
         </div>
