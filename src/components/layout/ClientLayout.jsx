@@ -3,6 +3,7 @@
 
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+import FloatingContactButtons from "../common/FloatingContactButtons";
 
 const Navbar = dynamic(() => import("./Navbar"), {
   ssr: false,
@@ -26,6 +27,8 @@ export default function ClientLayout({ children }) {
       </main>
 
       {!isStudio && <Footer />}
+
+      {!isStudio && <FloatingContactButtons />}
     </>
   );
 }
