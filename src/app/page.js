@@ -1,3 +1,4 @@
+//src/app/page.js
 import HeroSection from "@/sections/home/HeroSection";
 import AboutPreview from "@/sections/home/AboutPreview";
 import ServicesPreview from "@/sections/home/ServicesPreview";

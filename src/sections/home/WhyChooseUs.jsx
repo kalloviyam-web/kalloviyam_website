@@ -1,3 +1,4 @@
+//src/sections/home/WhyChooseUs.jsx
 "use client";
 
 import { motion } from "framer-motion";

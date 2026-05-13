@@ -1,3 +1,4 @@
+//src/sections/home/AboutPreview.jsx
 "use client";
 
 import Image from "next/image";
@@ -11,10 +12,8 @@ import Home3 from "@/assets/home_about_3.png";
 
 export default function AboutPreview() {
   return (
-    <section className="py-12 md:py-22">
-
+    <section className="py-12 md:py-22 overflow-hidden">
       <div className="container">
-
         <div
           className="
             grid
@@ -23,17 +22,38 @@ export default function AboutPreview() {
             items-center
           "
         >
-
           {/* LEFT */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              x: -60,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{
+              duration: 0.9,
+              ease: "easeOut",
+            }}
           >
-
-            <div className="flex items-center gap-3 mb-5">
-
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.1,
+              }}
+              className="flex items-center gap-3 mb-5"
+            >
               <span className="w-8 h-[2px] bg-[#C8862B]" />
 
               <p
@@ -47,10 +67,22 @@ export default function AboutPreview() {
               >
                 Who We Are
               </p>
+            </motion.div>
 
-            </div>
-
-            <h2
+            <motion.h2
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+              }}
               className="
                 text-[38px]
                 sm:text-[54px]
@@ -63,7 +95,6 @@ export default function AboutPreview() {
               "
             >
               A Home Should{" "}
-
               <span className="italic text-[#C8862B]">
                 Breathe,
               </span>
@@ -75,10 +106,24 @@ export default function AboutPreview() {
               </span>
 
               {" "}in It
-            </h2>
+            </motion.h2>
 
-            <div className="flex flex-col gap-6 mb-10">
-
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: 0.3,
+              }}
+              className="flex flex-col gap-6 mb-10"
+            >
               <p className="text-[#555] leading-[1.9]">
                 Kalloviyam was born from a simple yet powerful belief.
                 Rooted in traditional wisdom and shaped by modern sustainable practices,
@@ -92,19 +137,38 @@ export default function AboutPreview() {
                 environmentally responsible,
                 and aesthetically timeless.
               </p>
+            </motion.div>
 
-            </div>
-
-            <div className="flex flex-wrap gap-3 mb-10">
-
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.7,
+                delay: 0.4,
+              }}
+              className="flex flex-wrap gap-3 mb-10"
+            >
               {[
                 "interlock technology",
                 "mud block mastery",
                 "heritage design",
                 "vastu compliance",
               ].map((item) => (
-
-                <div
+                <motion.div
+                  whileHover={{
+                    y: -4,
+                    scale: 1.04,
+                  }}
+                  transition={{
+                    duration: 0.25,
+                  }}
                   key={item}
                   className="
                     px-4
@@ -116,51 +180,82 @@ export default function AboutPreview() {
 
                     text-[#666]
                     text-[13px]
+
+                    cursor-default
                   "
                 >
                   {item}
-                </div>
-
+                </motion.div>
               ))}
+            </motion.div>
 
-            </div>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.7,
+                delay: 0.5,
+              }}
+            >
+              <Link
+                href="/about"
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
 
-           <Link
-  href="/about"
-  className="
-    inline-block
+                  border-b
 
-    border-b
+                  pb-[2px]
 
-    pb-[2px]
+                  hover:gap-4
+                  hover:opacity-80
 
-    hover:opacity-70
-
-    transition-all
-    duration-300
-  "
-  style={{
-    color: "#C76F35",
-    borderColor: "#C76F35",
-  }}
->
-  Read Our Full Story →
-</Link>
-
+                  transition-all
+                  duration-300
+                "
+                style={{
+                  color: "#C76F35",
+                  borderColor: "#C76F35",
+                }}
+              >
+                Read Our Full Story →
+              </Link>
+            </motion.div>
           </motion.div>
-
 
           {/* RIGHT IMAGES */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{
+              opacity: 0,
+              x: 60,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{
+              duration: 0.9,
+              ease: "easeOut",
+            }}
           >
-
             <div className="grid grid-cols-2 gap-4">
-
-              <div
+              {/* BIG IMAGE */}
+              <motion.div
+                whileHover={{
+                  y: -8,
+                }}
+                transition={{
+                  duration: 0.35,
+                }}
                 className="
                   relative
 
@@ -168,23 +263,44 @@ export default function AboutPreview() {
 
                   overflow-hidden
                   rounded-[16px]
-                  
                 "
               >
-
                 <Image
                   src={Home1}
                   alt="About"
                   fill
                   sizes="50vw"
-                  className="object-cover"
+                  className="
+                    object-cover
+
+                    hover:scale-105
+
+                    transition-transform
+                    duration-700
+                  "
                 />
 
-              </div>
-
-              <div className="flex flex-col gap-4">
-
                 <div
+                  className="
+                    absolute
+                    inset-0
+
+                    bg-gradient-to-t
+                    from-black/10
+                    to-transparent
+                  "
+                />
+              </motion.div>
+
+              {/* SMALL IMAGES */}
+              <div className="flex flex-col gap-4">
+                <motion.div
+                  whileHover={{
+                    y: -8,
+                  }}
+                  transition={{
+                    duration: 0.35,
+                  }}
                   className="
                     relative
 
@@ -194,48 +310,80 @@ export default function AboutPreview() {
                     rounded-[16px]
                   "
                 >
-
                   <Image
                     src={Home2}
                     alt="About"
                     fill
                     sizes="50vw"
-                    className="object-cover"
+                    className="
+                      object-cover
+
+                      hover:scale-105
+
+                      transition-transform
+                      duration-700
+                    "
                   />
 
-                </div>
+                  <div
+                    className="
+                      absolute
+                      inset-0
 
-                <div
-  className="
-    relative
+                      bg-gradient-to-t
+                      from-black/10
+                      to-transparent
+                    "
+                  />
+                </motion.div>
 
-    h-[200px]
+                <motion.div
+                  whileHover={{
+                    y: -8,
+                  }}
+                  transition={{
+                    duration: 0.35,
+                  }}
+                  className="
+                    relative
 
-    overflow-hidden
-    rounded-[16px]
-  "
->
+                    h-[200px]
 
-  <Image
-    src={Home3}
-    alt="About"
-    fill
-    sizes="50vw"
-    className="object-cover"
-  />
+                    overflow-hidden
+                    rounded-[16px]
+                  "
+                >
+                  <Image
+                    src={Home3}
+                    alt="About"
+                    fill
+                    sizes="50vw"
+                    className="
+                      object-cover
 
-</div>
+                      hover:scale-105
 
+                      transition-transform
+                      duration-700
+                    "
+                  />
+
+                  <div
+                    className="
+                      absolute
+                      inset-0
+
+                      bg-gradient-to-t
+                      from-black/10
+                      to-transparent
+                    "
+                  />
+                </motion.div>
               </div>
-
             </div>
-
           </motion.div>
-
         </div>
-
       </div>
-
     </section>
   );
 }
