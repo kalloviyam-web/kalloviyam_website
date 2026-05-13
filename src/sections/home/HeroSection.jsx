@@ -50,7 +50,7 @@ export default function HeroSection() {
       setCurrent((prev) =>
         prev === heroSlides.length - 1 ? 0 : prev + 1
       );
-    }, 30000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
