@@ -156,10 +156,10 @@ export default function AboutPreview() {
               className="flex flex-wrap gap-3 mb-10"
             >
               {[
-                "interlock technology",
-                "mud block mastery",
-                "heritage design",
-                "vastu compliance",
+                "Interlock Technology",
+                "Mud Block Mastery",
+                "Heritage Design",
+                "Vastu Compliance",
               ].map((item) => (
                 <motion.div
                   whileHover={{
