@@ -5,13 +5,6 @@ import { useState } from "react";
 
 import { Phone, MapPin, Mail } from "lucide-react";
 
-import {
-  FaWhatsapp,
-  FaInstagram,
-  FaFacebookF,
-  FaYoutube,
-} from "react-icons/fa";
-
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -49,7 +42,9 @@ Message:
 ${formData.message}
     `;
 
-    const whatsappUrl = `https://wa.me/917010100073?text=${encodeURIComponent(text)}`;
+    const whatsappUrl = `https://wa.me/917010100073?text=${encodeURIComponent(
+      text
+    )}`;
 
     window.open(whatsappUrl, "_blank");
   };
@@ -61,56 +56,19 @@ ${formData.message}
         sm:pt-[100px]
         lg:pt-[120px]
 
-        pb-24
-        md:pb-32
+        pb-20
+        md:pb-24
       "
     >
       <div className="container">
-        {/* TOP */}
-        <div className="text-center mb-14 md:mb-20">
-          <h1
-            className="
-              text-[25px]
-              sm:text-[30px]
-              lg:text-[40px]
-
-              font-semibold
-
-              text-[#946700]
-
-              mb-3
-            "
-          >
-            Get in Touch
-          </h1>
-
-          <p
-            className="
-              text-[#D48716]
-
-              text-[15px]
-              sm:text-[18px]
-
-              leading-[1.8]
-
-              max-w-[700px]
-
-              mx-auto
-            "
-          >
-            Experience personalized service tailored to your high-end real
-            estate requirements.
-          </p>
-        </div>
-
         {/* MAIN GRID */}
         <div
           className="
             grid
-            lg:grid-cols-2
+            lg:grid-cols-[0.9fr_1.1fr]
 
-            gap-14
-            lg:gap-20
+            gap-10
+            lg:gap-14
 
             items-start
           "
@@ -118,13 +76,22 @@ ${formData.message}
           {/* LEFT */}
           <div>
             {/* CALL */}
-            <div className="flex gap-5 mb-12">
+            <div
+              className="
+                flex
+                items-center
+
+                gap-4
+
+                mb-6
+              "
+            >
               <div
                 className="
-                  w-[60px]
-                  h-[60px]
+                  w-[42px]
+                  h-[42px]
 
-                  rounded-[14px]
+                  rounded-[10px]
 
                   bg-[#F4E7CC]
 
@@ -135,93 +102,46 @@ ${formData.message}
                   shrink-0
                 "
               >
-                <Phone size={28} strokeWidth={1.8} color="#946700" />
+                <Phone
+                  size={18}
+                  strokeWidth={1.8}
+                  color="#946700"
+                />
               </div>
 
-              <div>
-                <p
-                  className="
-                    text-[#5C5C5C]
-                    text-[15px]
-                    font-semibold
-                    mb-2
-                  "
-                >
-                  Call Us
-                </p>
-
-                <a
-                  href="tel:+917010100073"
-                  className="
-                    text-[#2A2A2A]
-
-                    text-[17px]
-                    font-semibold
-                  "
-                >
-                  +91 7010100073
-                </a>
-              </div>
-            </div>
-
-            {/* LOCATION */}
-            <div className="flex gap-5 mb-12">
-              <div
+              <a
+                href="tel:+917010100073"
                 className="
-                  w-[60px]
-                  h-[60px]
+                  text-[#2A2A2A]
 
-                  rounded-[14px]
+                  text-[15px]
 
-                  bg-[#F4E7CC]
+                  font-medium
 
-                  flex
-                  items-center
-                  justify-center
-
-                  shrink-0
+                  leading-none
                 "
               >
-                <MapPin size={28} strokeWidth={1.8} color="#946700" />
-              </div>
-
-              <div>
-                <p
-                  className="
-                    text-[#5C5C5C]
-                    text-[15px]
-                    font-semibold
-                    mb-2
-                  "
-                >
-                  Our Location
-                </p>
-
-                <p
-                  className="
-                    text-[#2A2A2A]
-
-                    text-[17px]
-                    font-semibold
-
-                    leading-[1.8]
-                  "
-                >
-                  33/89, MGR St, Jansi Nagar, Veerappanchatram, Erode,
-                  <br />
-                  Tamil Nadu - 638004
-                </p>
-              </div>
+                +91 7010100073
+              </a>
             </div>
 
             {/* EMAIL */}
-            <div className="flex gap-5 mb-12">
+            <div
+              className="
+                flex
+                items-center
+
+                gap-4
+
+                mb-7
+              "
+            >
               <div
                 className="
-                  w-[60px]  
-                  h-[60px]
+                  w-[42px]
+                  h-[42px]
 
-                  rounded-[14px]
+                  rounded-[10px]
 
                   bg-[#F4E7CC]
 
@@ -232,35 +152,80 @@ ${formData.message}
                   shrink-0
                 "
               >
-                <Mail size={28} strokeWidth={1.8} color="#946700" />
+                <Mail
+                  size={18}
+                  strokeWidth={1.8}
+                  color="#946700"
+                />
               </div>
 
-              <div>
-                <p
-                  className="
-                    text-[#5C5C5C]
-                    text-[15px]
-                    font-semibold
-                    mb-2
-                  "
-                >
-                  Email Inquiries
-                </p>
+              <a
+                href="mailto:kalloviyam@gmail.com"
+                className="
+                  text-[#2A2A2A]
 
-                <a
-                  href="mailto:kalloviyam@gmail.com"
-                  className="
-                    text-[#2A2A2A]
+                  text-[15px]
 
-                    text-[17px]
-                    font-semibold
-                  "
-                >
-                  kalloviyam@gmail.com
-                </a>
-              </div>
+                  font-medium
+
+                  leading-none
+                "
+              >
+                kalloviyam@gmail.com
+              </a>
             </div>
 
+            {/* LOCATION */}
+            <div
+              className="
+                flex
+                items-center
+
+                gap-4
+
+                mb-6
+              "
+            >
+              <div
+                className="
+                  w-[42px]
+                  h-[42px]
+
+                  rounded-[10px]
+
+                  bg-[#F4E7CC]
+
+                  flex
+                  items-center
+                  justify-center
+
+                  shrink-0
+                "
+              >
+                <MapPin
+                  size={18}
+                  strokeWidth={1.8}
+                  color="#946700"
+                />
+              </div>
+
+              <p
+                className="
+                  text-[#2A2A2A]
+
+                  text-[15px]
+
+                  font-medium
+
+                  leading-[1.7]
+                "
+              >
+                33/89, MGR St, Jansi Nagar,
+                Veerappanchatram, Erode,
+                <br />
+                Tamil Nadu - 638004
+              </p>
+            </div>
 
             {/* MAP */}
             <a
@@ -272,7 +237,8 @@ ${formData.message}
               <div
                 className="
                   overflow-hidden
-                  rounded-[18px]
+
+                  rounded-[16px]
 
                   border
                   border-[#E9E9E9]
@@ -282,7 +248,7 @@ ${formData.message}
                   src="https://maps.google.com/maps?q=33/89,%20MGR%20St,%20Jansi%20Nagar,%20Veerappanchatram,%20Erode,%20Tamil%20Nadu%20638004&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   className="
                     w-full
-                    h-[320px]
+                    h-[280px]
 
                     border-0
                   "
@@ -295,41 +261,44 @@ ${formData.message}
           {/* RIGHT FORM */}
           <div
             className="
+              w-full
+
               bg-white
 
-              rounded-[24px]
+              rounded-[18px]
 
               border
               border-[#F0E3D6]
 
               shadow-[0_10px_40px_rgba(0,0,0,0.04)]
 
-              p-6
-              sm:p-10
+              p-5
+              sm:p-6
             "
           >
             <h2
               className="
-                text-[25px]
-                sm:text-[32px]
+                text-[22px]
+                sm:text-[28px]
 
                 font-semibold
 
                 text-black
 
-                mb-10
+                mb-5
               "
             >
               Send an Enquiry
             </h2>
 
-            <div className="space-y-7">
+            <div className="space-y-4">
               {/* NAME + EMAIL */}
               <div
                 className="
                   grid
                   sm:grid-cols-2
-                  gap-5
+
+                  gap-4
                 "
               >
                 <div>
@@ -337,12 +306,13 @@ ${formData.message}
                     className="
                       block
 
-                      text-[14px]
-                      font-semibold
+                      text-[13px]
+
+                      font-medium
 
                       text-[#444]
 
-                      mb-3
+                      mb-2
                     "
                   >
                     Full Name
@@ -356,7 +326,7 @@ ${formData.message}
                     placeholder="John Doe"
                     className="
                       w-full
-                      h-[56px]
+                      h-[44px]
 
                       rounded-[10px]
 
@@ -364,6 +334,8 @@ ${formData.message}
                       border-[#D8D8D8]
 
                       px-4
+
+                      text-[14px]
 
                       outline-none
 
@@ -377,12 +349,13 @@ ${formData.message}
                     className="
                       block
 
-                      text-[14px]
-                      font-semibold
+                      text-[13px]
+
+                      font-medium
 
                       text-[#444]
 
-                      mb-3
+                      mb-2
                     "
                   >
                     Email Address
@@ -396,7 +369,7 @@ ${formData.message}
                     placeholder="john@example.com"
                     className="
                       w-full
-                      h-[56px]
+                      h-[44px]
 
                       rounded-[10px]
 
@@ -404,6 +377,8 @@ ${formData.message}
                       border-[#D8D8D8]
 
                       px-4
+
+                      text-[14px]
 
                       outline-none
 
@@ -413,59 +388,19 @@ ${formData.message}
                 </div>
               </div>
 
-              {/* PHONE */}
-              <div>
-                <label
-                  className="
-                    block
-
-                    text-[14px]
-                    font-semibold
-
-                    text-[#444]
-
-                    mb-3
-                  "
-                >
-                  Phone Number
-                </label>
-
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="+91 9876543210"
-                  className="
-                    w-full
-                    h-[56px]
-
-                    rounded-[10px]
-
-                    border
-                    border-[#D8D8D8]
-
-                    px-4
-
-                    outline-none
-
-                    focus:border-[#C8862B]
-                  "
-                />
-              </div>
-
               {/* LOCATION */}
               <div>
                 <label
                   className="
                     block
 
-                    text-[14px]
-                    font-semibold
+                    text-[13px]
+
+                    font-medium
 
                     text-[#444]
 
-                    mb-3
+                    mb-2
                   "
                 >
                   Location
@@ -479,7 +414,7 @@ ${formData.message}
                   placeholder="Coimbatore, Tamil Nadu"
                   className="
                     w-full
-                    h-[56px]
+                    h-[44px]
 
                     rounded-[10px]
 
@@ -487,6 +422,8 @@ ${formData.message}
                     border-[#D8D8D8]
 
                     px-4
+
+                    text-[14px]
 
                     outline-none
 
@@ -499,100 +436,101 @@ ${formData.message}
               <div className="relative">
                 <label
                   className="
-      block
+                    block
 
-      text-[14px]
-      font-semibold
+                    text-[13px]
 
-      text-[#444]
+                    font-medium
 
-      mb-3
-    "
+                    text-[#444]
+
+                    mb-2
+                  "
                 >
                   Enquiry Type
                 </label>
 
-                {/* SELECT BOX */}
                 <div
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="
-      h-[56px]
+                    h-[44px]
 
-      rounded-[14px]
+                    rounded-[10px]
 
-      border
-      border-[#D8D8D8]
+                    border
+                    border-[#D8D8D8]
 
-      bg-white
+                    bg-white
 
-      px-5
+                    px-4
 
-      flex
-      items-center
-      justify-between
+                    flex
+                    items-center
+                    justify-between
 
-      cursor-pointer
+                    cursor-pointer
 
-      transition-all
-      duration-300
+                    transition-all
+                    duration-300
 
-      hover:border-[#C8862B]
-
-      shadow-[0_4px_12px_rgba(0,0,0,0.03)]
-    "
+                    hover:border-[#C8862B]
+                  "
                 >
-                  <span className="text-[#222] text-[16px]">
+                  <span className="text-[#222] text-[14px]">
                     {formData.enquiryType}
                   </span>
 
                   <svg
-                    width="18"
-                    height="18"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className={`
-        transition-transform
-        duration-300
-        ${dropdownOpen ? "rotate-180" : ""}
-      `}
+                      transition-transform
+                      duration-300
+                      ${dropdownOpen ? "rotate-180" : ""}
+                    `}
                   >
                     <path
                       d="M6 9L12 15L18 9"
                       stroke="#343434"
-                      strokeWidth="2.2"
+                      strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
                 </div>
 
-                {/* DROPDOWN MENU */}
+                {/* DROPDOWN */}
                 {dropdownOpen && (
                   <div
                     className="
-  absolute
-  left-0
-  top-[92px]
+                      absolute
+                      left-0
+                      top-[78px]
 
-  w-full
+                      w-full
 
-  overflow-hidden
+                      overflow-hidden
 
-  rounded-[14px]
+                      rounded-[12px]
 
-  border
-  border-[#E5D6C7]
+                      border
+                      border-[#E5D6C7]
 
-  bg-white
+                      bg-white
 
-  shadow-[0_15px_35px_rgba(0,0,0,0.08)]
+                      shadow-[0_15px_35px_rgba(0,0,0,0.08)]
 
-  z-50
-
-      "
+                      z-50
+                    "
                   >
-                    {["Project", "Vendor", "Normal Enquiry"].map((item) => (
+                    {[
+                      "Project",
+                      "Vendor",
+                      "Normal Enquiry",
+                    ].map((item) => (
                       <div
                         key={item}
                         onClick={() => {
@@ -604,22 +542,22 @@ ${formData.message}
                           setDropdownOpen(false);
                         }}
                         className={`
-            px-5
-            py-4
+                          px-4
+                          py-3
 
-            cursor-pointer
+                          cursor-pointer
 
-            transition-all
-            duration-200
+                          transition-all
+                          duration-200
 
-            text-[15px]
+                          text-[14px]
 
-            ${
-              formData.enquiryType === item
-                ? "bg-[#F8EFE3] text-[#C8862B]"
-                : "hover:bg-[#FAF6F1] text-[#222]"
-            }
-          `}
+                          ${
+                            formData.enquiryType === item
+                              ? "bg-[#F8EFE3] text-[#C8862B]"
+                              : "hover:bg-[#FAF6F1] text-[#222]"
+                          }
+                        `}
                       >
                         {item}
                       </div>
@@ -634,19 +572,20 @@ ${formData.message}
                   className="
                     block
 
-                    text-[14px]
-                    font-semibold
+                    text-[13px]
+
+                    font-medium
 
                     text-[#444]
 
-                    mb-3
+                    mb-2
                   "
                 >
                   Message
                 </label>
 
                 <textarea
-                  rows={6}
+                  rows={3}
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -660,7 +599,9 @@ ${formData.message}
                     border-[#D8D8D8]
 
                     px-4
-                    py-4
+                    py-3
+
+                    text-[14px]
 
                     outline-none
 
@@ -676,7 +617,7 @@ ${formData.message}
                 onClick={handleWhatsAppSubmit}
                 className="
                   w-full
-                  h-[58px]
+                  h-[46px]
 
                   rounded-[10px]
 
@@ -685,12 +626,11 @@ ${formData.message}
 
                   text-white
 
-                  text-[15px]
-                  font-semibold
+                  text-[14px]
+
+                  font-medium
 
                   tracking-[1px]
-
-                  shadow-[0_10px_20px_rgba(0,0,0,0.08)]
 
                   transition-all
                   duration-300
