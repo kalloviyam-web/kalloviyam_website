@@ -189,8 +189,8 @@ blur-[140px]
 
     shadow-[0_4px_18px_rgba(0,0,0,0.04)]
 
-    hover:bg-[#C8862B]
-    hover:border-[#C8862B]
+    hover:bg-[#4F6743]
+    hover:border-[#4F6743]
 
     transition-all
     duration-300

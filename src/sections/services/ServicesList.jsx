@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import Service1 from "@/assets/service1.png";
 import Service2 from "@/assets/service2.png";
@@ -68,15 +69,13 @@ const services = [
 ];
 
 export default function ServicesList() {
+  const router = useRouter();
+
   return (
     <section className="pb-28">
-
       <div className="container">
-
         <div className="flex flex-col gap-20">
-
           {services.map((service, index) => (
-
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
@@ -100,10 +99,8 @@ export default function ServicesList() {
   }
 `}
             >
-
               {/* CONTENT */}
               <div>
-
                 <div
                   className="
                     inline-flex
@@ -115,9 +112,9 @@ export default function ServicesList() {
                     rounded-full
 
                     border
-                    border-[#E2B68B]
+                    border-[#4F6743]
 
-                    text-[#D68A4A]
+                    text-[#4F6743]
                     text-[12px]
                     tracking-[1px]
 
@@ -146,7 +143,7 @@ export default function ServicesList() {
                   <span
                     className="
                       italic
-                      text-[#D68A4A]
+                      text-[#4F6743]
                       font-light
                     "
                   >
@@ -163,9 +160,7 @@ export default function ServicesList() {
                     mb-10
                   "
                 >
-
                   {service.points.map((point, i) => (
-
                     <li
                       key={i}
                       className="
@@ -179,14 +174,13 @@ export default function ServicesList() {
                       <span>•</span>
                       <span>{point}</span>
                     </li>
-
                   ))}
-
                 </ul>
 
                 <button
+                  onClick={() => router.push("/contact")}
                   className="
-                    text-[#C8862B]
+                    text-[#4F6743]
 
                     underline
 
@@ -199,13 +193,10 @@ export default function ServicesList() {
                 >
                   Enquire about this service →
                 </button>
-
               </div>
-
 
               {/* IMAGE */}
               <div>
-
                 <div
                   className="
                     relative
@@ -218,27 +209,19 @@ export default function ServicesList() {
                     rounded-[18px]
                   "
                 >
-
                   <Image
-  src={service.image}
-  alt={service.title}
-  fill
-  sizes="(max-width: 768px) 100vw, 50vw"
-  className="object-cover"
-/>
-
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
-
               </div>
-
             </motion.div>
-
           ))}
-
         </div>
-
       </div>
-
     </section>
   );
 }

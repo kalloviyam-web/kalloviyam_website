@@ -48,7 +48,7 @@ export default function ServicesHero() {
               "
             >
 
-              <span className="w-9 h-[2px] bg-[#C8862B]" />
+              <span className="w-9 h-[2px] bg-[#4F6743]" />
 
               <p
                 className="
@@ -56,7 +56,7 @@ export default function ServicesHero() {
                   tracking-[2px]
                   text-[11px]
                   font-semibold
-                  text-[#C8862B]
+                  text-[#4F6743]
                 "
               >
                 Erode, Tamil Nadu
@@ -83,7 +83,7 @@ export default function ServicesHero() {
                 Where
               </span>{" "}
 
-              <span className="text-[#C8862B]">
+              <span className="text-[#4F6743]">
                 Roots
               </span>
 
@@ -120,8 +120,8 @@ export default function ServicesHero() {
 
     rounded-[10px]
 
-    bg-[#C8862B]
-    hover:bg-[#A96E1F]
+    bg-[#4F6743]
+    hover:bg-[#328C05]
 
     
     font-medium

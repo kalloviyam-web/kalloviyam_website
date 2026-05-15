@@ -51,11 +51,11 @@ md:pb-28
               "
             >
 
-              <span className="w-8 h-[2px] bg-[#C8862B]" />
+              <span className="w-8 h-[2px] bg-[#4F6743]" />
 
               <p
                 className="
-                  text-[#C8862B]
+                  text-[#4F6743]
                   uppercase
                   tracking-[2px]
                   text-[11px]
@@ -147,8 +147,8 @@ md:pb-28
 
     rounded-[12px]
 
-    bg-[#C8862B]
-    hover:bg-[#A96E1F]
+    bg-[#4F6743]
+    hover:bg-[#328C05]
 
     
     font-semibold
@@ -202,7 +202,7 @@ sm:h-[90px]
 lg:w-[110px]
 lg:h-[110px]
 
-                bg-[#E9D2BF]
+                bg-[#CBD2C7]
 
                 block
               "
@@ -230,7 +230,7 @@ sm:h-[65px]
 lg:w-[80px]
 lg:h-[80px]
 
-                bg-[#EFD9B9]
+                bg-[#CBD2C7]
 
                 block
               "

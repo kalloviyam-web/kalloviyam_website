@@ -37,7 +37,7 @@ export default function VisionMission() {
             "
           >
 
-            <div className="text-[#B26E0C] text-3xl mb-5">
+            <div className="text-[#328C05] text-3xl mb-5">
               <Eye size={34} strokeWidth={2} />
             </div>
 
@@ -81,7 +81,7 @@ export default function VisionMission() {
             "
           >
 
-            <div className="text-[#F5A623] text-3xl mb-5">
+            <div className="text-[#328C05] text-3xl mb-5">
               <Compass size={34} strokeWidth={2} />
             </div>
 

@@ -6,10 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
-import { Plus, X } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 export default function FloatingContactButtons() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div
@@ -75,7 +75,7 @@ export default function FloatingContactButtons() {
 
                 rounded-full
 
-                bg-[#B57B45]
+                bg-[#4F6743]
 
                 flex
                 items-center
@@ -142,7 +142,7 @@ export default function FloatingContactButtons() {
 
                 rounded-full
 
-                bg-[#25D366]
+                bg-[#4F6743]
 
                 flex
                 items-center
@@ -223,7 +223,7 @@ export default function FloatingContactButtons() {
   "
         >
           {open ? (
-            <X size={20} strokeWidth={1.5} />
+            <Minus size={20} strokeWidth={1.5} />
           ) : (
             <Plus size={20} strokeWidth={1.5} />
           )}

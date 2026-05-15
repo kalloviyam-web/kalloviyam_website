@@ -27,7 +27,7 @@ export default function ServicesIntro() {
             "
           >
 
-            <span className="w-12 h-[1px] bg-[#C8862B]" />
+            <span className="w-12 h-[1px] bg-[#4F6743]" />
 
             <p
               className="
@@ -35,13 +35,13 @@ export default function ServicesIntro() {
                 tracking-[2px]
                 text-[11px]
                 font-semibold
-                text-[#C8862B]
+                text-[#4F6743]
               "
             >
               Our Expertise
             </p>
 
-            <span className="w-12 h-[1px] bg-[#C8862B]" />
+            <span className="w-12 h-[1px] bg-[#4F6743]" />
 
           </div>
 
@@ -59,7 +59,7 @@ export default function ServicesIntro() {
               Four Pillars of
             </span>{" "}
 
-            <span className="text-[#C8862B]">
+            <span className="text-[#4F6743]">
               Our Craft
             </span>
           </h2>

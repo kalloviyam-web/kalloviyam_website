@@ -65,7 +65,7 @@ export default function WhyChooseUs() {
     items-center
     justify-center
 
-    text-[#B26E0C]
+    text-[#328C05]
   "
               >
                 <item.icon size={42} strokeWidth={1.8} />

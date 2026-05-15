@@ -93,7 +93,7 @@ ${formData.message}
 
                   rounded-[10px]
 
-                  bg-[#F4E7CC]
+                  bg-[#CBD2C7]
 
                   flex
                   items-center
@@ -105,7 +105,7 @@ ${formData.message}
                 <Phone
                   size={18}
                   strokeWidth={1.8}
-                  color="#946700"
+                  color="#328C05"
                 />
               </div>
 
@@ -143,7 +143,7 @@ ${formData.message}
 
                   rounded-[10px]
 
-                  bg-[#F4E7CC]
+                  bg-[#CBD2C7]
 
                   flex
                   items-center
@@ -155,7 +155,7 @@ ${formData.message}
                 <Mail
                   size={18}
                   strokeWidth={1.8}
-                  color="#946700"
+                  color="#328C05"
                 />
               </div>
 
@@ -193,7 +193,7 @@ ${formData.message}
 
                   rounded-[10px]
 
-                  bg-[#F4E7CC]
+                  bg-[#CBD2C7]
 
                   flex
                   items-center
@@ -205,7 +205,7 @@ ${formData.message}
                 <MapPin
                   size={18}
                   strokeWidth={1.8}
-                  color="#946700"
+                  color="#328C05"
                 />
               </div>
 
@@ -621,8 +621,8 @@ ${formData.message}
 
                   rounded-[10px]
 
-                  bg-[#A67811]
-                  hover:bg-[#8E650D]
+                  bg-[#4F6743]
+                  hover:bg-[#328C05]
 
                   text-white
 
