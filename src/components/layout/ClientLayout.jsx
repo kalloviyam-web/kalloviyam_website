@@ -26,7 +26,7 @@ export default function ClientLayout({ children }) {
         {children}
       </main>
 
-      {!isStudio && <Footer />}
+      {!isStudio && pathname !== "/" && <Footer />}
 
       {!isStudio && <FloatingContactButtons />}
     </>
