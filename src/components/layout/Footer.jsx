@@ -41,22 +41,22 @@ const navLinks = [
 const socials = [
   {
     icon: <FaWhatsapp />,
-    href: "#",
+    href: "https://api.whatsapp.com/send/?phone=917010100073&text&type=phone_number&app_absent=0",
   },
 
   {
     icon: <FaInstagram />,
-    href: "#",
+    href: "https://www.instagram.com/kalloviyam?igsh=MWRlNW1lbTRndm9tdw%3D%3D",
   },
 
   {
     icon: <FaFacebookF />,
-    href: "#",
+    href: "https://www.facebook.com/share/1ESr4VLKFW/",
   },
 
   {
     icon: <FaYoutube />,
-    href: "#",
+    href: "https://www.youtube.com/@kalloviyam-thebreathablehomes",
   },
 ];
 
@@ -159,8 +159,10 @@ blur-[140px]
         >
           {socials.map((item, index) => (
             <motion.a
-              key={index}
-              href={item.href}
+  key={index}
+  href={item.href}
+  target="_blank"
+  rel="noopener noreferrer"
               whileHover={{
                 y: -5,
                 scale: 1.06,

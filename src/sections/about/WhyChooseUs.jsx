@@ -3,7 +3,12 @@
 
 import { motion } from "framer-motion";
 
-import { Thermometer, Leaf, Shield, Wallet } from "lucide-react";
+import {
+  Thermometer,
+  Leaf,
+  Shield,
+  Trees,
+} from "lucide-react";
 
 const features = [
   {
@@ -23,10 +28,11 @@ const features = [
     icon: Shield,
   },
   {
-    title: "Affordability",
-    description: "High-end sustainable design accessible for every family.",
-    icon: Wallet,
-  },
+  title: "Sustainability",
+  description:
+    "Nature-friendly homes built for sustainable living.",
+  icon: Trees,
+},
 ];
 
 export default function WhyChooseUs() {
