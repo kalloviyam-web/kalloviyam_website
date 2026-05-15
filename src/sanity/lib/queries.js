@@ -1,3 +1,4 @@
+//src/sanity/lib/queries.js
 import { groq } from "next-sanity";
 
 export const allProjectsQuery = groq`

@@ -1,6 +1,7 @@
 //src/app/layout.js
 
 import "./globals.css";
+import { Cormorant_Garamond } from "next/font/google";
 
 import { Poppins } from "next/font/google";
 
@@ -11,7 +12,10 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
 export const metadata = {
   title: "Kalloviyam",
   description: "Construction Company Website",
