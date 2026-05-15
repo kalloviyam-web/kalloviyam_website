@@ -473,7 +473,7 @@ ${formData.message}
                     transition-all
                     duration-300
 
-                    hover:border-[#C8862B]
+                    hover:border-[#CBD2C7]
                   "
                 >
                   <span className="text-[#222] text-[14px]">
@@ -554,8 +554,8 @@ ${formData.message}
 
                           ${
                             formData.enquiryType === item
-                              ? "bg-[#F8EFE3] text-[#C8862B]"
-                              : "hover:bg-[#FAF6F1] text-[#222]"
+                              ? "bg-[#CBD2C7] text-[#4F6743]"
+                              : "hover:bg-[#F0FFE9] text-[#222]"
                           }
                         `}
                       >

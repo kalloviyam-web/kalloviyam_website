@@ -75,3 +75,10 @@ img{
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@font-face {
+  font-family: "Baamini";
+  src: url("/fonts/Baamini.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

@@ -10,7 +10,8 @@ import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import Logo from "@/assets/logo.png";
+import WhiteLogo from "@/assets/white_logo.png";
+import BlackLogo from "@/assets/black_logo.png";
 
 const navLinks = [
   {
@@ -42,10 +43,12 @@ export default function Navbar() {
 
   const pathname = usePathname();
 
-  /* Scroll Effect */
+  const isHomePage = pathname === "/";
+
+  /* Navbar Background On Scroll */
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -84,36 +87,26 @@ export default function Navbar() {
         {/* NAVBAR */}
         <div
           className={`
-            w-full
+  w-full
 
-            h-[70px]
-            md:h-[76px]
+  h-[70px]
+  md:h-[76px]
 
-            flex
-            items-center
-            justify-between
+  flex
+  items-center
+  justify-between
 
-            px-5
-            sm:px-7
-            md:px-10
-            lg:px-16
-            xl:px-20
+  px-5
+  sm:px-7
+  md:px-10
+  lg:px-16
+  xl:px-20
 
-            rounded-b-[38px]
-            md:rounded-b-[50px]
-            lg:rounded-b-[65px]
+  transition-all
+  duration-500
 
-            shadow-[0_8px_30px_rgba(0,0,0,0.18)]
-
-            transition-all
-            duration-500
-
-            ${
-              scrolled
-                ? "bg-gradient-to-r from-[#3F3B38]/95 via-[#4B4541]/95 to-[#5A534D]/95 backdrop-blur-md"
-                : "bg-gradient-to-r from-[#4A443F]/95 via-[#5A534D]/95 to-[#6A625B]/95 backdrop-blur-sm"
-            }
-          `}
+  ${scrolled ? "bg-[#F8F7F4]/85 backdrop-blur-md" : "bg-transparent"}
+`}
         >
           {/* LOGO */}
           <Link
@@ -130,7 +123,7 @@ export default function Navbar() {
               transition={{ duration: 0.8 }}
             >
               <Image
-                src={Logo}
+                src={isHomePage ? WhiteLogo : BlackLogo}
                 alt="Kalloviyam Logo"
                 priority
                 className="
@@ -144,20 +137,30 @@ export default function Navbar() {
             </motion.div>
 
             <h1
-              className="
-                text-white
+  className={`
+    font-['Baamini']
 
-                text-[18px]
-                sm:text-[20px]
-                md:text-[21px]
+    text-[20px]
+    md:text-[23px]
 
-                font-semibold
+    leading-none
 
-                tracking-[0.5px]
-              "
-            >
-              kalloviyam
-            </h1>
+    transition-all
+    duration-300
+
+    ${
+      isHomePage
+        ? "text-white"
+        : "text-black"
+    }
+  `}
+  style={{
+    fontWeight: 500,
+    letterSpacing: "2px",
+  }}
+>
+  கல்லோவியம்
+</h1>
           </Link>
 
           {/* DESKTOP MENU */}
@@ -174,17 +177,16 @@ export default function Navbar() {
           >
             {navLinks.map((link, index) => {
               const isActive =
-  link.path === "/"
-    ? pathname === "/"
-    : pathname.startsWith(link.path);
+                link.path === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.path);
 
               return (
                 <motion.div
                   key={index}
                   whileHover={{
-    y: -2,
-    
-  }}
+                    y: -2,
+                  }}
                   transition={{ duration: 0.2 }}
                 >
                   <Link
@@ -192,19 +194,29 @@ export default function Navbar() {
                     className={`
   relative
 
-  text-[15px]
-  font-semibold
+  text-[12px]
+
+  uppercase
+
+  tracking-[4px]
+
+  font-medium
+
+  font-['Montserrat']
 
   transition-all
   duration-300
 
   ${
-  isActive
-    ? "!text-[#FFA93A]"
-    : "!text-white hover:!text-[#FFA93A]"
-}
+    isHomePage
+      ? isActive
+        ? "!text-white"
+        : "!text-white/75 hover:!text-white"
+      : isActive
+        ? "!text-black"
+        : "!text-black/60 hover:!text-black"
+  }
 `}
-                    
                   >
                     {link.name}
 
@@ -216,18 +228,14 @@ export default function Navbar() {
 
                         h-[2px]
 
-                        bg-[#FFA93A]
-
                         rounded-full
 
                         transition-all
                         duration-300
 
-                        ${
-                          isActive
-                            ? "w-full"
-                            : "w-0"
-                        }
+                        ${isHomePage ? "bg-white" : "bg-black"}
+
+                        ${isActive ? "w-full" : "w-0"}
                       `}
                     />
                   </Link>
@@ -239,13 +247,16 @@ export default function Navbar() {
           {/* MOBILE MENU BUTTON */}
           <motion.button
             whileTap={{ scale: 0.9 }}
-            className="
+            className={`
               lg:hidden
 
-              text-white
-
               text-[32px]
-            "
+
+              transition-all
+              duration-300
+
+              ${isHomePage ? "text-white" : "text-black"}
+            `}
             onClick={() => setMobileMenu(true)}
           >
             <HiOutlineMenuAlt3 />
@@ -277,9 +288,9 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenu && (
           <motion.div
-            initial={{ x: '100%' }}
+            initial={{ x: "100%" }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: "100%" }}
             transition={{ duration: 0.45 }}
             className="
               fixed
@@ -289,10 +300,7 @@ export default function Navbar() {
               h-screen
               w-full
 
-              bg-gradient-to-br
-              from-[#4A443F]
-              via-[#5A534D]
-              to-[#6A625B]
+              bg-white
 
               z-[1000]
 
@@ -306,13 +314,46 @@ export default function Navbar() {
                 whileHover={{ rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 className="
-                  text-white
+                  text-black
                   text-[42px]
                 "
                 onClick={() => setMobileMenu(false)}
               >
                 <HiOutlineX />
               </motion.button>
+            </div>
+
+            {/* MOBILE LOGO */}
+            <div className="pt-8 pl-7">
+              <Link
+                href="/"
+                onClick={() => setMobileMenu(false)}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
+                <Image
+                  src={BlackLogo}
+                  alt="Kalloviyam Logo"
+                  className="
+                    w-[36px]
+                    h-[36px]
+                    object-contain
+                  "
+                />
+
+                <h1
+                  className="
+                    text-[22px]
+                    font-semibold
+                    text-black
+                  "
+                >
+                  kalloviyam
+                </h1>
+              </Link>
             </div>
 
             {/* MOBILE NAVIGATION */}
@@ -331,9 +372,9 @@ export default function Navbar() {
             >
               {navLinks.map((link, index) => {
                 const isActive =
-  link.path === "/"
-    ? pathname === "/"
-    : pathname.startsWith(link.path);
+                  link.path === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.path);
 
                 return (
                   <motion.div
@@ -346,21 +387,21 @@ export default function Navbar() {
                       href={link.path}
                       onClick={() => setMobileMenu(false)}
                       className={`
-  text-[30px]
-  md:text-[34px]
+  text-[24px]
+  md:text-[28px]
+
+  uppercase
+
+  tracking-[5px]
 
   font-medium
 
-  tracking-[1px]
+  font-['Montserrat']
 
   transition-all
   duration-300
 
-  ${
-  isActive
-    ? "!text-[#FFA93A]"
-    : "!text-white hover:!text-[#FFA93A]"
-}
+  ${isActive ? "!text-black" : "!text-black/55 hover:!text-black"}
 `}
                     >
                       {link.name}

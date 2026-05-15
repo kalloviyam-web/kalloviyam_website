@@ -1,7 +1,7 @@
 //src/app/layout.js
 
 import "./globals.css";
-import { Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond,Montserrat } from "next/font/google";
 
 import { Poppins } from "next/font/google";
 
@@ -11,6 +11,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
 });
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -27,6 +31,8 @@ export default function RootLayout({ children }) {
       <body
         className={`
           ${poppins.className}
+          ${montserrat.variable}
+         
           bg-[#F8F7F5]
           text-[#1F1F1F]
           overflow-x-hidden
