@@ -24,7 +24,8 @@ export default function ServicesHero() {
         <div
           className="
             grid
-            lg:grid-cols-2
+lg:grid-cols-2
+fd-lg-grid-2
             gap-14
             lg:gap-20
             items-center

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Cormorant_Garamond,Montserrat } from "next/font/google";
 
 import { Poppins } from "next/font/google";
+import DesktopModeDetector from "@/components/DesktopModeDetector";
 
 import ClientLayout from "@/components/layout/ClientLayout";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
           overflow-x-hidden
         `}
       >
+        <DesktopModeDetector />
         <SmoothScroll>
           <ClientLayout>
             {children}

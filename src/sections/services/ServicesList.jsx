@@ -83,20 +83,29 @@ export default function ServicesList() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
               className={`
-  grid
-  lg:grid-cols-2
+ grid
+lg:grid-cols-2
+fd-lg-grid-2
   gap-10
   lg:gap-16
   items-center
 
   [&>*:first-child]:order-2
-  [&>*:last-child]:order-1
+[&>*:last-child]:order-1
 
-  ${
-    service.reverse
-      ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
-      : "lg:[&>*:first-child]:order-1 lg:[&>*:last-child]:order-2"
-  }
+${
+  service.reverse
+    ? `
+      lg:[&>*:first-child]:order-2
+      lg:[&>*:last-child]:order-1
+      fd-order-reverse
+    `
+    : `
+      lg:[&>*:first-child]:order-1
+      lg:[&>*:last-child]:order-2
+      fd-order-normal
+    `
+}
 `}
             >
               {/* CONTENT */}

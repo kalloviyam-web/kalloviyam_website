@@ -82,3 +82,102 @@ img{
   font-weight: normal;
   font-style: normal;
 }
+
+/* =========================================
+   FORCE DESKTOP MODE
+========================================= */
+
+.force-desktop .fd-lg-flex {
+  display: flex !important;
+}
+
+.force-desktop .fd-lg-grid-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.force-desktop .fd-lg-grid-4 {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.force-desktop .fd-lg-hidden {
+  display: none !important;
+}
+
+.force-desktop .fd-project-row {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+}
+
+.force-desktop .fd-project-scroll {
+  height: 100vh !important;
+
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.force-desktop .fd-project-width {
+  width: max-content !important;
+}
+
+.force-desktop .fd-project-section {
+  height: 100vh !important;
+}
+
+.force-desktop .fd-lg-grid-project-description {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr 0.9fr !important;
+}
+
+.force-desktop .fd-lg-grid-project-features {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 0.9fr !important;
+}
+
+.force-desktop .fd-lg-w-40 {
+  width: 40% !important;
+}
+
+.force-desktop .fd-lg-w-60 {
+  width: 60% !important;
+}
+
+.force-desktop .fd-lg-h-full {
+  height: 100% !important;
+}
+
+.force-desktop .fd-lg-minw-1600 {
+  min-width: 1600px !important;
+}
+
+.force-desktop .fd-lg-minw-2400 {
+  min-width: 2400px !important;
+}
+
+.force-desktop .fd-lg-minw-1500 {
+  min-width: 1500px !important;
+}
+
+.force-desktop .fd-lg-minw-1350 {
+  min-width: 1350px !important;
+}
+
+
+/* SERVICES ZIG ZAG FORCE */
+
+.force-desktop .fd-order-normal > *:first-child {
+  order: 1 !important;
+}
+
+.force-desktop .fd-order-normal > *:last-child {
+  order: 2 !important;
+}
+
+.force-desktop .fd-order-reverse > *:first-child {
+  order: 2 !important;
+}
+
+.force-desktop .fd-order-reverse > *:last-child {
+  order: 1 !important;
+}

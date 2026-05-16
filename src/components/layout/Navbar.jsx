@@ -68,7 +68,6 @@ export default function Navbar() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return (
     <>
       {/* HEADER */}
@@ -137,7 +136,7 @@ export default function Navbar() {
             </motion.div>
 
             <h1
-  className={`
+              className={`
     font-['Baamini']
 
     text-[20px]
@@ -148,33 +147,29 @@ export default function Navbar() {
     transition-all
     duration-300
 
-    ${
-      isHomePage
-        ? "text-white"
-        : "text-black"
-    }
+    ${isHomePage ? "text-white" : "text-black"}
   `}
-  style={{
-    fontWeight: 500,
-    letterSpacing: "2px",
-  }}
->
-  கல்லோவியம்
-</h1>
+              style={{
+                fontWeight: 500,
+                letterSpacing: "2px",
+              }}
+            >
+              கல்லோவியம்
+            </h1>
           </Link>
 
           {/* DESKTOP MENU */}
           <nav
-            className="
-              hidden
-              lg:flex
+  className="
+    hidden
+    lg:flex
+    fd-lg-flex
 
-              items-center
-
-              gap-10
-              xl:gap-14
-            "
-          >
+    items-center
+    gap-10
+    xl:gap-14
+  "
+>
             {navLinks.map((link, index) => {
               const isActive =
                 link.path === "/"
@@ -248,15 +243,16 @@ export default function Navbar() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             className={`
-              lg:hidden
+  lg:hidden
+  fd-lg-hidden
 
-              text-[32px]
+  text-[32px]
 
-              transition-all
-              duration-300
+  transition-all
+  duration-300
 
-              ${isHomePage ? "text-white" : "text-black"}
-            `}
+  ${isHomePage ? "text-white" : "text-black"}
+`}
             onClick={() => setMobileMenu(true)}
           >
             <HiOutlineMenuAlt3 />

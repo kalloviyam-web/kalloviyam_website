@@ -26,7 +26,8 @@ md:pb-28
         <div
           className="
             grid
-            lg:grid-cols-2
+lg:grid-cols-2
+fd-lg-grid-2
             gap-16
             lg:gap-20
             items-center
