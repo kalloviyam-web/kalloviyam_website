@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import WhiteFont from "@/assets/white_font.png";
+import BlackFont from "@/assets/black_font.png";
 
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 
@@ -135,27 +137,37 @@ export default function Navbar() {
               />
             </motion.div>
 
-            <h1
-              className={`
-    font-['Baamini']
+            <div
+  className="
+    relative
 
-    text-[20px]
-    md:text-[23px]
+    w-[165px]
+    sm:w-[185px]
+    md:w-[190px]
+    lg:w-[200px]
 
-    leading-none
+    h-[34px]
+    sm:h-[38px]
+    md:h-[38px]
+    lg:h-[35px]
 
     transition-all
     duration-300
+  "
+>
+  <Image
+    src={isHomePage ? WhiteFont : BlackFont}
+    alt="Kalloviyam"
 
-    ${isHomePage ? "text-white" : "text-black"}
-  `}
-              style={{
-                fontWeight: 500,
-                letterSpacing: "2px",
-              }}
-            >
-              கல்லோவியம்
-            </h1>
+    fill
+    priority
+
+    className="
+      object-contain
+      object-left
+    "
+  />
+</div>
           </Link>
 
           {/* DESKTOP MENU */}
@@ -264,10 +276,16 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenu && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+  initial={{ opacity: 0 }}
+
+animate={{ opacity: 1 }}
+
+exit={{ opacity: 0 }}
+
+transition={{
+  duration: 0.22,
+  ease: "linear",
+}}
             className="
               fixed
               inset-0
@@ -284,19 +302,36 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenu && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.45 }}
+            initial={{
+  opacity: 0,
+  scale: 1.015,
+}}
+
+animate={{
+  opacity: 1,
+  scale: 1,
+}}
+
+exit={{
+  opacity: 0,
+  scale: 1.01,
+}}
+
+transition={{
+  duration: 0.28,
+  ease: [0.16, 1, 0.3, 1],
+}}
             className="
               fixed
               top-0
+              will-change-transform
+  transform-gpu
               right-0
 
               h-screen
               w-full
 
-              bg-white
+              bg-[#F8F7F4]
 
               z-[1000]
 
@@ -340,15 +375,26 @@ export default function Navbar() {
                   "
                 />
 
-                <h1
-                  className="
-                    text-[22px]
-                    font-semibold
-                    text-black
-                  "
-                >
-                  kalloviyam
-                </h1>
+                <div
+  className="
+    relative
+
+    w-[170px]
+    h-[34px]
+  "
+>
+  <Image
+    src={BlackFont}
+    alt="Kalloviyam"
+
+    fill
+
+    className="
+      object-contain
+      object-left
+    "
+  />
+</div>
               </Link>
             </div>
 
@@ -363,7 +409,7 @@ export default function Navbar() {
                 items-center
                 justify-center
 
-                gap-10
+                gap-8
               "
             >
               {navLinks.map((link, index) => {
@@ -375,9 +421,21 @@ export default function Navbar() {
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.08 }}
+                    initial={{
+  opacity: 0,
+  y: 8,
+}}
+
+animate={{
+  opacity: 1,
+  y: 0,
+}}
+
+transition={{
+  duration: 0.22,
+  delay: index * 0.035,
+  ease: "easeOut",
+}}
                   >
                     <Link
                       href={link.path}
