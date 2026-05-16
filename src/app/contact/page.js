@@ -323,7 +323,7 @@ ${formData.message}
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Kathiravan"
                     className="
                       w-full
                       h-[44px]
@@ -366,7 +366,7 @@ ${formData.message}
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="kathir@example.com"
                     className="
                       w-full
                       h-[44px]

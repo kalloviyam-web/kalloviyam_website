@@ -92,26 +92,26 @@ export default function HeroSection() {
       "
     >
       {/* BACKGROUND IMAGE */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         <motion.div
-          key={current}
-          initial={{
-            scale: 1.08,
-            opacity: 0,
-          }}
-          animate={{
-            scale: 1,
-            opacity: 1,
-          }}
-          exit={{
-            opacity: 0,
-          }}
-          transition={{
-            duration: 1.6,
-            ease: "easeOut",
-          }}
-          className="absolute inset-0"
-        >
+  key={current}
+  initial={{
+    scale: 1.03,
+    opacity: 0.55,
+  }}
+  animate={{
+    scale: 1,
+    opacity: 1,
+  }}
+  exit={{
+    opacity: 0.92,
+  }}
+  transition={{
+    duration: 0.65,
+    ease: "easeOut",
+  }}
+  className="absolute inset-0"
+>
           <Image
             src={heroSlides[current].image}
             alt={heroSlides[current].heading}
@@ -166,7 +166,7 @@ export default function HeroSection() {
         "
       >
         <div className="container">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="sync">
             <motion.div
               key={current}
               initial={{
@@ -179,12 +179,12 @@ export default function HeroSection() {
               }}
               exit={{
                 opacity: 0,
-                y: -30,
+                y: -10,
               }}
               transition={{
-                duration: 0.9,
-                ease: "easeOut",
-              }}
+  duration: 0.45,
+  ease: [0.22, 1, 0.36, 1],
+}}
               className="
                 px-5
 
@@ -208,9 +208,10 @@ export default function HeroSection() {
                   y: 0,
                 }}
                 transition={{
-                  duration: 0.8,
-                  delay: 0.15,
-                }}
+  duration: 0.35,
+  delay: 0.02,
+  ease: [0.22, 1, 0.36, 1],
+}}
                 className="
                   text-[#D7B27A]
 
@@ -240,9 +241,10 @@ export default function HeroSection() {
                   y: 0,
                 }}
                 transition={{
-                  duration: 1,
-                  delay: 0.25,
-                }}
+  duration: 0.42,
+  delay: 0.06,
+  ease: [0.22, 1, 0.36, 1],
+}}
                 className="
                   text-white
 
