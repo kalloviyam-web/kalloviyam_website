@@ -83,10 +83,11 @@ export default function HeroSection() {
       className="
         relative
 
-        h-screen
-        min-h-[100svh]
+        h-[100svh]
+max-h-[100svh]
 
         overflow-hidden
+overscroll-none
 
         touch-pan-y
       "
@@ -159,9 +160,11 @@ export default function HeroSection() {
           h-full
 
           flex
-          items-center
-          justify-center
+         items-center
+justify-center
 
+pt-10
+pb-16
           text-center
         "
       >
@@ -233,7 +236,9 @@ transition={{
                   sm:text-[20px]
                   lg:text-[30px]
 
-                  leading-[2.0]
+                  leading-[1.55]
+sm:leading-[1.7]
+lg:leading-[2.0]
 
                   font-[300]
 
@@ -241,7 +246,9 @@ transition={{
 
                   text-center
 
-                  max-w-[1100px]
+                  max-w-[320px]
+sm:max-w-[520px]
+lg:max-w-[1100px]
 
                   mx-auto
                 "
@@ -338,7 +345,9 @@ transition={{
       <div
         className="
           absolute
-          bottom-8
+          bottom-5
+sm:bottom-7
+lg:bottom-8
           left-1/2
 
           -translate-x-1/2
@@ -362,10 +371,32 @@ transition={{
               duration-500
 
               ${
-                current === index
-                  ? "w-[34px] h-[8px] bg-white"
-                  : "w-[8px] h-[8px] bg-white/40"
-              }
+  current === index
+    ? `
+      w-[24px]
+      h-[5px]
+
+      sm:w-[30px]
+      sm:h-[7px]
+
+      lg:w-[34px]
+      lg:h-[8px]
+
+      bg-white
+    `
+    : `
+      w-[5px]
+      h-[5px]
+
+      sm:w-[7px]
+      sm:h-[7px]
+
+      lg:w-[8px]
+      lg:h-[8px]
+
+      bg-white/40
+    `
+}
             `}
           />
         ))}

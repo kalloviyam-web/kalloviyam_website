@@ -64,11 +64,11 @@ export default function FloatingContactButtons() {
                 scale: 0.92,
               }}
               className="
-                w-[38px]
-                h-[38px]
+                w-[46px]
+                h-[46px]
 
-                sm:w-[42px]
-                sm:h-[42px]
+                sm:w-[46px]
+                sm:h-[46px]
 
                 md:w-[46px]
                 md:h-[46px]
@@ -91,11 +91,11 @@ export default function FloatingContactButtons() {
                 className="
                   text-white
 
-                  text-[13px]
+                  text-[16px]
 
-                  sm:text-[14px]
+                  sm:text-[16px]
 
-                  md:text-[15px]
+                  md:text-[16px]
                 "
               />
             </motion.a>
@@ -131,11 +131,11 @@ export default function FloatingContactButtons() {
                 scale: 0.92,
               }}
               className="
-                w-[38px]
-                h-[38px]
+                w-[46px]
+                h-[46px]
 
-                sm:w-[42px]
-                sm:h-[42px]
+                sm:w-[46px]
+                sm:h-[46px]
 
                 md:w-[46px]
                 md:h-[46px]
@@ -158,9 +158,9 @@ export default function FloatingContactButtons() {
                 className="
                   text-white
 
-                  text-[18px]
+                  text-[22px]
 
-                  sm:text-[20px]
+                  sm:text-[22px]
 
                   md:text-[22px]
                 "
@@ -181,8 +181,8 @@ export default function FloatingContactButtons() {
         className="
           relative
 
-          w-[42px]
-          h-[42px]
+          w-[44px]
+          h-[44px]
 
           sm:w-[42px]
           sm:h-[42px]
