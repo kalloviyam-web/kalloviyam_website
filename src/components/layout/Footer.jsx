@@ -288,7 +288,7 @@ export default function Footer() {
 
   flex-nowrap
 
-  gap-[22px]
+  gap-[18px]
   sm:gap-x-8
 
   overflow-x-auto
