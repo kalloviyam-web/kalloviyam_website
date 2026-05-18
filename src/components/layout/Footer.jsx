@@ -14,7 +14,7 @@ import {
 
 import { Cormorant_Garamond } from "next/font/google";
 
-import BlackLogo from "@/assets/black_logo.png";
+import FooterLogo from "@/assets/footer_logo.png";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -160,110 +160,70 @@ export default function Footer() {
         >
           {/* LEFT BRAND */}
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.7,
-            }}
-            className="
-              flex
-              items-center
+  initial={{
+    opacity: 0,
+    y: 20,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  viewport={{ once: true }}
+  transition={{
+    duration: 0.7,
+  }}
+  className="
+    relative
 
-              gap-4
-            "
-          >
-            {/* LOGO */}
-            <Image
-              src={BlackLogo}
-              alt="Kalloviyam Logo"
-              className="
-                w-[40px]
-                h-[40px]
+    flex
+    items-center
+    justify-center
 
-                object-contain
-              "
-            />
-
-            {/* BRAND TEXT */}
-            <div
-              className="
-                flex
-                flex-col
-              "
-            >
-              {/* NAME */}
-              <div
-                className="
-                  flex
-                  items-start
-                "
-              >
-                <span
-                  className={`
-                    ${cormorant.className}
-
-                    text-[26px]
-                    sm:text-[28px]
-
-                    font-medium
-
-                    tracking-[1.2px]
-
-                    text-[#111111]
-
-                    leading-none
-                  `}
-                >
-                  Kalloviyam
-                </span>
-
-                {/* TM */}
-                <span
-                  className="
-                    text-[12px]
-
-                    mt-[4px]
-                    ml-[2px]
-
-                    font-semibold
-
-                    text-[#444444]
-                  "
-                >
-                  ™
-                </span>
-              </div>
-
-              {/* TAGLINE */}
-              <span
-                className="
-    mt-[5px]
-
-    text-[8px]
-    sm:text-[10px]
-
-    uppercase
-
-    tracking-[2.6px]
-
-    text-[#6F6A63]
-
-    leading-none
-
-    whitespace-nowrap
+    shrink-0
   "
-              >
-                THE BREATHABLE HOMES
-              </span>
-            </div>
-          </motion.div>
+>
+  <Image
+    src={FooterLogo}
+    alt="Kalloviyam Footer Logo"
+    priority
+    className="
+      w-[180px]
+      sm:w-[180px]
+      lg:w-[240px]
+
+      h-auto
+
+      object-contain
+    "
+  />
+
+  {/* TM SYMBOL */}
+  <span
+    className="
+      absolute
+
+      top-[12px]
+      right-[-8px]
+
+      sm:top-[20px]
+      sm:right-[-8px]
+
+      lg:top-[16px]
+      lg:right-[-10px]
+
+      text-[12px]
+      sm:text-[15px]
+
+      font-semibold
+
+      text-[#2B2B2B]
+
+      tracking-[0.5px]
+    "
+  >
+    ™
+  </span>
+</motion.div>
 
           {/* CENTER NAV */}
           <motion.div
