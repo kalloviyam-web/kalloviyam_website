@@ -139,7 +139,7 @@ export default function Navbar() {
             className="
               flex
               items-center
-              gap-3
+              gap-0
 
               shrink-0
 
@@ -147,30 +147,6 @@ export default function Navbar() {
               z-[1300]
             "
           >
-            <motion.div
-              whileHover={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 0.8,
-              }}
-            >
-              <Image
-                src={isHomePage ? WhiteLogo : BlackLogo}
-                alt="Kalloviyam Logo"
-                priority
-                className="
-                  w-[34px]
-                  h-[34px]
-
-                  md:w-[38px]
-                  md:h-[38px]
-
-                  object-contain
-                "
-              />
-            </motion.div>
-
             <div
   className="
     flex
@@ -193,9 +169,9 @@ export default function Navbar() {
         ${cormorant.className}
 
         text-[26px]
-        sm:text-[34px]
-        md:text-[35px]
-        lg:text-[36px]
+        sm:text-[30px]
+        md:text-[30px]
+        lg:text-[32px]
 
         font-medium
 
@@ -219,41 +195,23 @@ export default function Navbar() {
     >
       Kalloviyam
     </span>
-
-    {/* TM SYMBOL */}
-    <span
-      className={`
-        text-[9px]
-        sm:text-[10px]
-
-        ml-[2px]
-        mt-[4px]
-
-        font-semibold
-
-        ${
-          isHomePage
-            ? "text-[#D2D1CD]/80"
-            : "text-[#111111]/70"
-        }
-      `}
-    >
-      ™
-    </span>
   </div>
 
   {/* TAGLINE */}
   <span
     className={`
       text-[8px]
-      sm:text-[9px]
-      md:text-[10px]
+      sm:text-[7px]
+      md:text-[8px]
 
       uppercase
 
       tracking-[2.8px]
 
-      mt-[4px]
+      mt-[5px]
+      sm:mt-[8px]
+      md:mt-[10px]
+      lg:mt-[8px]
 
       font-medium
 
@@ -384,7 +342,7 @@ export default function Navbar() {
 
               ${
   isHomePage
-    ? "text-white"
+    ? "text-[#D2D1CD]"
     : mobileMenu
       ? "text-black"
       : "text-black"
