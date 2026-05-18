@@ -9,15 +9,16 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { Cormorant_Garamond } from "next/font/google";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-import WhiteFont from "@/assets/white_font.png";
-import BlackFont from "@/assets/black_font.png";
 
 import WhiteLogo from "@/assets/white_logo.png";
 import BlackLogo from "@/assets/black_logo.png";
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
 const navLinks = [
   {
     name: "Home",
@@ -120,11 +121,15 @@ export default function Navbar() {
             transition-all
             duration-500
 
-            ${
-              scrolled || mobileMenu
-                ? "bg-[#F8F7F4]/88 backdrop-blur-md"
-                : "bg-transparent"
-            }
+           ${
+  mobileMenu
+    ? isHomePage
+      ? "bg-transparent"
+      : "bg-[#F8F7F4]/88 backdrop-blur-md"
+    : scrolled
+      ? "bg-[#F8F7F4]/88 backdrop-blur-md"
+      : "bg-transparent"
+}
           `}
         >
           {/* LOGO */}
@@ -151,7 +156,7 @@ export default function Navbar() {
               }}
             >
               <Image
-                src={isHomePage && !mobileMenu ? WhiteLogo : BlackLogo}
+                src={isHomePage ? WhiteLogo : BlackLogo}
                 alt="Kalloviyam Logo"
                 priority
                 className="
@@ -167,34 +172,106 @@ export default function Navbar() {
             </motion.div>
 
             <div
-              className="
-                relative
+  className="
+    flex
+    flex-col
 
-                w-[165px]
-                sm:w-[185px]
-                md:w-[190px]
-                lg:w-[200px]
+    items-start
 
-                h-[34px]
-                sm:h-[38px]
-                md:h-[38px]
-                lg:h-[35px]
+    leading-none
+  "
+>
+  {/* COMPANY NAME */}
+  <div
+    className="
+      flex
+      items-start
+    "
+  >
+    <span
+      className={`
+        ${cormorant.className}
 
-                transition-all
-                duration-300
-              "
-            >
-              <Image
-                src={isHomePage && !mobileMenu ? WhiteFont : BlackFont}
-                alt="Kalloviyam"
-                fill
-                priority
-                className="
-                  object-contain
-                  object-left
-                "
-              />
-            </div>
+        text-[26px]
+        sm:text-[34px]
+        md:text-[35px]
+        lg:text-[36px]
+
+        font-medium
+
+        tracking-[2px]
+
+        leading-none
+
+        transition-all
+        duration-300
+
+        ${
+          isHomePage
+            ? "text-[#D2D1CD]"
+            : "text-[#111111]"
+        }
+      `}
+      style={{
+        fontFeatureSettings:
+          '"liga" 1, "kern" 1',
+      }}
+    >
+      Kalloviyam
+    </span>
+
+    {/* TM SYMBOL */}
+    <span
+      className={`
+        text-[9px]
+        sm:text-[10px]
+
+        ml-[2px]
+        mt-[4px]
+
+        font-semibold
+
+        ${
+          isHomePage
+            ? "text-[#D2D1CD]/80"
+            : "text-[#111111]/70"
+        }
+      `}
+    >
+      ™
+    </span>
+  </div>
+
+  {/* TAGLINE */}
+  <span
+    className={`
+      text-[8px]
+      sm:text-[9px]
+      md:text-[10px]
+
+      uppercase
+
+      tracking-[2.8px]
+
+      mt-[4px]
+
+      font-medium
+
+      font-['Montserrat']
+
+      transition-all
+      duration-300
+
+      ${
+        isHomePage
+          ? "text-[#D2D1CD]/58"
+          : "text-[#111111]/52"
+      }
+    `}
+  >
+    The Breathable Homes
+  </span>
+</div>
           </Link>
 
           {/* DESKTOP MENU */}
@@ -306,12 +383,12 @@ export default function Navbar() {
               z-[1300]
 
               ${
-                mobileMenu
-                  ? "text-black"
-                  : isHomePage
-                    ? "text-white"
-                    : "text-black"
-              }
+  isHomePage
+    ? "text-white"
+    : mobileMenu
+      ? "text-black"
+      : "text-black"
+}
             `}
             onClick={() => setMobileMenu(!mobileMenu)}
           >
@@ -441,19 +518,33 @@ transition={{
   duration: 0.42,
   ease: [0.16, 1, 0.3, 1],
 }}
-            className="
-              fixed
-              inset-0
+            className={`
+  fixed
+  inset-0
 
-              z-[1000]
+  z-[1000]
 
-              bg-[#F8F7F4]/96
-shadow-[0_0_80px_rgba(0,0,0,0.08)]
-              backdrop-blur-sm
+  ${
+    isHomePage
+      ? `
+        bg-black/96
 
-              will-change-transform
-              transform-gpu
-            "
+        backdrop-blur-md
+
+        shadow-[0_0_120px_rgba(0,0,0,0.45)]
+      `
+      : `
+        bg-[#F8F7F4]/96
+
+        backdrop-blur-sm
+
+        shadow-[0_0_80px_rgba(0,0,0,0.08)]
+      `
+  }
+
+  will-change-transform
+  transform-gpu
+`}
           >
             {/* MOBILE NAVIGATION */}
             <nav
@@ -517,11 +608,15 @@ transition={{
                           transition-all
                           duration-300
 
-                          ${
-                            isActive
-                              ? "!text-black"
-                              : "!text-black/55 hover:!text-black"
-                          }
+                         ${
+  isHomePage
+    ? isActive
+      ? "!text-white"
+      : "!text-white/45 hover:!text-white"
+    : isActive
+      ? "!text-black"
+      : "!text-black/55 hover:!text-black"
+}
                         `}
                     >
                       {link.name}

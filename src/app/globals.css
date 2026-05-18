@@ -181,3 +181,5 @@ img{
 .force-desktop .fd-order-reverse > *:last-child {
   order: 1 !important;
 }
+
+@import "../styles/fonts.css";

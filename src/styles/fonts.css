@@ -1,0 +1,35 @@
+/* ===== SENTHAMIZH 022 ===== */
+@font-face {
+  font-family: "ST022";
+  src: url("/fonts/st-022.TTF") format("truetype");
+}
+
+/* ===== SENTHAMIZH 026 ===== */
+@font-face {
+  font-family: "ST026";
+  src: url("/fonts/st-026.TTF") format("truetype");
+}
+
+/* ===== SENTHAMIZH 077 ===== */
+@font-face {
+  font-family: "ST077";
+  src: url("/fonts/st-077.TTF") format("truetype");
+}
+
+/* ===== SENTHAMIZH 078 ===== */
+@font-face {
+  font-family: "ST078";
+  src: url("/fonts/st-078.TTF") format("truetype");
+}
+
+/* ===== SENTHAMIZH 101 ===== */
+@font-face {
+  font-family: "ST101";
+  src: url("/fonts/st-101.TTF") format("truetype");
+}
+
+/* ===== SENTHAMIZH 107 ===== */
+@font-face {
+  font-family: "ST107";
+  src: url("/fonts/st-107.TTF") format("truetype");
+}
