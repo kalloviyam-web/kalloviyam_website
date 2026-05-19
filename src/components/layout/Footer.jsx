@@ -160,19 +160,19 @@ export default function Footer() {
         >
           {/* LEFT BRAND */}
           <motion.div
-  initial={{
-    opacity: 0,
-    y: 20,
-  }}
-  whileInView={{
-    opacity: 1,
-    y: 0,
-  }}
-  viewport={{ once: true }}
-  transition={{
-    duration: 0.7,
-  }}
-  className="
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.7,
+            }}
+            className="
     relative
 
     flex
@@ -181,12 +181,12 @@ export default function Footer() {
 
     shrink-0
   "
->
-  <Image
-    src={FooterLogo}
-    alt="Kalloviyam Footer Logo"
-    priority
-    className="
+          >
+            <Image
+              src={FooterLogo}
+              alt="Kalloviyam Footer Logo"
+              priority
+              className="
       w-[180px]
       sm:w-[180px]
       lg:w-[240px]
@@ -195,11 +195,11 @@ export default function Footer() {
 
       object-contain
     "
-  />
+            />
 
-  {/* TM SYMBOL */}
-  <span
-    className="
+            {/* TM SYMBOL */}
+            <span
+              className="
       absolute
 
       top-[12px]
@@ -216,14 +216,14 @@ export default function Footer() {
 
       font-semibold
 
-      text-[#2B2B2B]
+      text-[#555555]
 
       tracking-[0.5px]
     "
-  >
-    ™
-  </span>
-</motion.div>
+            >
+              ™
+            </span>
+          </motion.div>
 
           {/* CENTER NAV */}
           <motion.div
@@ -262,22 +262,23 @@ export default function Footer() {
                 key={index}
                 href={item.href}
                 className="
-                  relative
+    relative
 
-                  text-[10px]
-sm:text-[12px]
+    text-[10px]
+    sm:text-[12px]
 
-                  tracking-[2.6px]
+    tracking-[2.6px]
 
-                  font-semibold
+    font-semibold
 
-                  text-[#555555]
+    hover:opacity-70
 
-                  hover:text-[#111111]
-
-                  transition-colors
-                  duration-300
-                "
+    transition-all
+    duration-300
+  "
+                style={{
+                  color: "#555555",
+                }}
               >
                 {item.name}
               </Link>
