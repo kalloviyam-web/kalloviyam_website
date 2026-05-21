@@ -1,8 +1,8 @@
-//src/components/layout/ClientLayout.jsx
 "use client";
 
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+
 import FloatingContactButtons from "../common/FloatingContactButtons";
 
 const Navbar = dynamic(() => import("./Navbar"), {
@@ -18,19 +18,26 @@ export default function ClientLayout({ children }) {
 
   const isStudio = pathname.startsWith("/studio");
 
+  const isVisitingCard = pathname === "/visiting_card";
+
   return (
     <>
-      {!isStudio && <Navbar />}
+      {/* Navbar */}
+      {!isStudio && !isVisitingCard && <Navbar />}
 
-      <main>
-        {children}
-      </main>
+      {/* Page Content */}
+      <main>{children}</main>
 
+      {/* Footer */}
       {!isStudio &&
-  pathname !== "/" &&
-  !pathname.startsWith("/projects/") && <Footer />}
+        !isVisitingCard &&
+        pathname !== "/" &&
+        !pathname.startsWith("/projects/") && <Footer />}
 
-      {!isStudio && <FloatingContactButtons />}
+      {/* Floating Buttons */}
+      {!isStudio && !isVisitingCard && (
+        <FloatingContactButtons />
+      )}
     </>
   );
 }
