@@ -1,3 +1,4 @@
+//src/components/layout/ClientLayout.jsx
 "use client";
 
 import dynamic from "next/dynamic";

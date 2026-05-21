@@ -1,7 +1,9 @@
+//src/app/visiting_card/data.js
 const data = {
   company: "Kalloviyam",
   owner: "Gogul V",
   role: "Registered Engineer DTCP",
+degree: "B.E., PGDQSV.,",
 
   phone: "7010100073",
   whatsapp: "7010100073",

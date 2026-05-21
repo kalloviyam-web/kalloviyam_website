@@ -1,3 +1,4 @@
+//src/app/visiting_card/page.jsx
 import VisitingCardClient from "./VisitingCardClient";
 
 export const metadata = {

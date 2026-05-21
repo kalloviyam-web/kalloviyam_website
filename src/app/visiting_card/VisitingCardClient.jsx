@@ -1,3 +1,4 @@
+//src/app/visiting_card/VisitingCardClient.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -47,47 +48,41 @@ const cardVariants = {
 };
 
 export default function VisitingCardClient() {
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-const [showMain, setShowMain] = useState(false);
-  
+  const [showMain, setShowMain] = useState(false);
 
   useEffect(() => {
-  const loadingTimer = setTimeout(() => {
-    setLoading(false);
+    const loadingTimer = setTimeout(() => {
+      setLoading(false);
 
-    setTimeout(() => {
-      setShowMain(true);
-    }, 300);
-  }, 3200);
+      setTimeout(() => {
+        setShowMain(true);
+      }, 300);
+    }, 3200);
 
-  return () => clearTimeout(loadingTimer);
-}, []);
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const saveContact = () => {
-    const vCard = `
-BEGIN:VCARD
-VERSION:3.0
-FN:${data.owner}
-ORG:${data.company}
-TEL:${data.phone}
-EMAIL:${data.email}
-URL:${data.website}
-ADR:${data.address}
-END:VCARD
-`;
-
-    const blob = new Blob([vCard], {
-      type: "text/vcard",
-    });
-
     const link = document.createElement("a");
 
-    link.href = URL.createObjectURL(blob);
+    link.href = "/api/contact";
 
-    link.download = `${data.company}.vcf`;
+    link.download = "Gogul V.vcf";
+
+    document.body.appendChild(link);
 
     link.click();
+
+    document.body.removeChild(link);
+
+    // Premium mobile guidance
+    setTimeout(() => {
+      alert(
+        "Contact file downloaded successfully.\n\nOpen the downloaded file to add contact instantly.",
+      );
+    }, 500);
   };
 
   const shareProfile = async () => {
@@ -104,25 +99,25 @@ END:VCARD
     <>
       {/* INTRO SCREEN */}
       <AnimatePresence mode="wait">
-  {loading && (
-    <motion.div
-      key="intro-screen"
-      initial={{
-        opacity: 1,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-  opacity: 0,
-  scale: 1,
-  y: -8,
-}}
-      transition={{
-        duration: 1.4,
-        ease: [0.76, 0, 0.24, 1],
-      }}
-      className="
+        {loading && (
+          <motion.div
+            key="intro-screen"
+            initial={{
+              opacity: 1,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 1,
+              y: -8,
+            }}
+            transition={{
+              duration: 1.4,
+              ease: [0.76, 0, 0.24, 1],
+            }}
+            className="
         fixed
         inset-0
         z-[9999]
@@ -132,24 +127,24 @@ END:VCARD
         items-center
         justify-center
       "
-    >
-      {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#EFE7E2,#F7F3F0_65%)]" />
+          >
+            {/* Background */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#EFE7E2,#F7F3F0_65%)]" />
 
-      {/* Animated Glow */}
-      <motion.div
-        animate={{
-          scale: [1, 1.12, 1],
-x: [0, 20, -20, 0],
-y: [0, -10, 10, 0],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
+            {/* Animated Glow */}
+            <motion.div
+              animate={{
+                scale: [1, 1.12, 1],
+                x: [0, 20, -20, 0],
+                y: [0, -10, 10, 0],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="
           absolute
           w-[500px]
           h-[500px]
@@ -157,63 +152,62 @@ y: [0, -10, 10, 0],
           rounded-full
           blur-3xl
         "
-      />
+            />
 
-      <div className="relative z-10 text-center px-6">
+            <div className="relative z-10 text-center px-6">
+              {/* Logo */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 0.4,
+                  rotate: -12,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  rotate: 0,
+                }}
+                transition={{
+                  duration: 1.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-[#C6A16E30] blur-3xl rounded-full" />
 
-        {/* Logo */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.4,
-            rotate: -12,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-          }}
-          transition={{
-            duration: 1.4,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="relative"
-        >
-          <div className="absolute inset-0 bg-[#C6A16E30] blur-3xl rounded-full" />
+                <motion.img
+                  animate={{
+                    y: [0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  src="/visiting-card/logo.png"
+                  alt="logo"
+                  className="relative w-36 mx-auto"
+                />
+              </motion.div>
 
-          <motion.img
-            animate={{
-              y: [0, -8, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            src="/visiting-card/logo.png"
-            alt="logo"
-            className="relative w-36 mx-auto"
-          />
-        </motion.div>
-
-        {/* Brand */}
-        <motion.h1
-          initial={{
-            opacity: 0,
-            y: 40,
-            letterSpacing: "18px",
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            letterSpacing: "8px",
-          }}
-          transition={{
-            delay: 0.5,
-            duration: 1.5,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="
+              {/* Brand */}
+              <motion.h1
+                initial={{
+                  opacity: 0,
+                  y: 40,
+                  letterSpacing: "18px",
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  letterSpacing: "8px",
+                }}
+                transition={{
+                  delay: 0.5,
+                  duration: 1.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="
             mt-14
             text-[40px]
             md:text-[52px]
@@ -221,79 +215,79 @@ y: [0, -10, 10, 0],
            text-[#1F2937]
             font-light
           "
-          style={{
-            fontFamily: cormorant.style.fontFamily,
-          }}
-        >
-          KALLOVIYAM
-        </motion.h1>
+                style={{
+                  fontFamily: cormorant.style.fontFamily,
+                }}
+              >
+                KALLOVIYAM
+              </motion.h1>
 
-        {/* Welcome */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            delay: 1.4,
-duration: 1.4,
-ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mt-8"
-        >
-          <p
-            className="
+              {/* Welcome */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  delay: 1.4,
+                  duration: 1.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-8"
+              >
+                <p
+                  className="
               text-[#C6A16E]
               text-[15px]
               tracking-[6px]
               uppercase
               font-medium
             "
-            style={{
-              fontFamily: montserrat.style.fontFamily,
-            }}
-          >
-            Welcome To
-          </p>
+                  style={{
+                    fontFamily: montserrat.style.fontFamily,
+                  }}
+                >
+                  Welcome To
+                </p>
 
-          <p
-            className="
+                <p
+                  className="
               text-[#1F2937]
               text-[24px]
               tracking-[3px]
               mt-3
               font-light
             "
-            style={{
-              fontFamily: montserrat.style.fontFamily,
-            }}
-          >
-            Kalloviyam Constructions
-          </p>
-        </motion.div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                  style={{
+                    fontFamily: montserrat.style.fontFamily,
+                  }}
+                >
+                  Kalloviyam Constructions
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* MAIN PAGE */}
       {showMain && (
-  <motion.main
-  initial={{
-    opacity: 0,
-  }}
-  animate={{
-    opacity: loading ? 0 : 1,
-  }}
-  transition={{
-    duration: 0.6,
-delay: 0,
-  }}
- className="
+        <motion.main
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: loading ? 0 : 1,
+          }}
+          transition={{
+            duration: 0.6,
+            delay: 0,
+          }}
+          className="
   relative
   min-h-screen
   overflow-hidden
@@ -302,162 +296,191 @@ delay: 0,
   will-change-transform
   translate-z-0
 "
->
-        {/* Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#EFE7E2,#F7F3F0_65%)]" />
+        >
+          {/* Background */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#EFE7E2,#F7F3F0_65%)]" />
 
-        {/* Glow */}
-        <div className="absolute top-[-120px] left-[-120px] w-96 h-96 bg-[#C6A16E15] rounded-full blur-3xl" />
+          {/* Glow */}
+          <div className="absolute top-[-120px] left-[-120px] w-96 h-96 bg-[#C6A16E15] rounded-full blur-3xl" />
 
-        <div className="absolute bottom-[-120px] right-[-120px] w-96 h-96 bg-[#C6A16E08] rounded-full blur-3xl" />
+          <div className="absolute bottom-[-120px] right-[-120px] w-96 h-96 bg-[#C6A16E08] rounded-full blur-3xl" />
 
-        {/* Noise */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          {/* Noise */}
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-        <div className="relative z-10 w-full max-w-md mx-auto px-6 py-14">
-          {/* HERO */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0,
-              duration: 1,
-            }}
-            className="text-center"
-          >
-            {/* Floating Logo */}
+          <div className="relative z-10 w-full max-w-md mx-auto px-6 py-14">
+            {/* HERO */}
             <motion.div
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
               animate={{
-                y: [0, -8, 0],
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
+                delay: 0,
+                duration: 1,
               }}
-              className="relative inline-block"
+              className="text-center"
             >
-              <div className="absolute inset-0 bg-[#C6A16E30] blur-3xl rounded-full" />
+              {/* Floating Logo */}
+              <motion.div
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative inline-block"
+              >
+                <div className="absolute inset-0 bg-[#C6A16E30] blur-3xl rounded-full" />
 
+                <img
+                  src="/visiting-card/logo.png"
+                  alt="logo"
+                  className="relative w-32 mx-auto"
+                />
+              </motion.div>
+
+              {/* Logo Text */}
               <img
-                src="/visiting-card/logo.png"
-                alt="logo"
-                className="relative w-32 mx-auto"
+                src="/visiting-card/logo-text.png"
+                alt="logo text"
+                className="w-64 mx-auto -mt-4 opacity-90 object-contain"
               />
+
+              {/* Owner */}
+              <div className="mt-6 flex items-baseline justify-center gap-2 flex-wrap">
+                <h2
+                  className="
+      text-[52px]
+      leading-none
+      font-semibold
+      tracking-wide
+      text-[#1F2937]
+    "
+                  style={{
+                    fontFamily: cormorant.style.fontFamily,
+                  }}
+                >
+                  {data.owner}
+                </h2>
+
+                <span
+                  className="
+      text-[11px]
+      tracking-[3px]
+      text-[#8B7355]
+      uppercase
+      font-medium
+      relative
+      top-[2px]
+    "
+                  style={{
+                    fontFamily: montserrat.style.fontFamily,
+                  }}
+                >
+                  {data.degree}
+                </span>
+              </div>
+              {/* Role */}
+              <p className="text-[#C6A16E] mt-3 text-sm tracking-[4px] uppercase">
+                {data.role}
+              </p>
+
+              {/* Divider */}
+              <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#C6A16E] to-transparent mx-auto mt-8" />
             </motion.div>
 
-            {/* Logo Text */}
-            <img
-              src="/visiting-card/logo-text.png"
-              alt="logo text"
-              className="w-64 mx-auto -mt-4 opacity-90 object-contain"
-            />
+            {/* CONTACT CARDS */}
+            <div className="space-y-4 mt-10">
+              <PremiumCard
+                index={0}
+                icon={<FaMapMarkerAlt />}
+                title="Location"
+                subtitle="33/89, MGR St, Jansi Nagar, Veerappanchatram, Erode, Tamil Nadu 638004"
+                link={data.map}
+              />
 
-            {/* Owner */}
-            <h2 className="text-4xl font-semibold mt-6 tracking-wide">
-              {data.owner}
-            </h2>
+              <PremiumCard
+                index={1}
+                icon={<FaEnvelope />}
+                title="Email"
+                subtitle={data.email}
+                link={`mailto:${data.email}`}
+              />
 
-            {/* Role */}
-            <p className="text-[#C6A16E] mt-3 text-sm tracking-[4px] uppercase">
-              {data.role}
-            </p>
+              <PremiumCard
+                index={2}
+                icon={<FaWhatsapp />}
+                title="WhatsApp"
+                subtitle="+91 70101 00073"
+                link={`https://wa.me/91${data.whatsapp}`}
+              />
 
-            {/* Divider */}
-            <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#C6A16E] to-transparent mx-auto mt-8" />
-          </motion.div>
+              <PremiumCard
+                index={3}
+                icon={<FaInstagram />}
+                title="Instagram"
+                subtitle={data.instagram.name}
+                link={data.instagram.link}
+              />
 
-          {/* CONTACT CARDS */}
-          <div className="space-y-4 mt-10">
-            <PremiumCard
-              index={0}
-              icon={<FaMapMarkerAlt />}
-              title="Location"
-              subtitle="33/89, MGR St, Jansi Nagar, Veerappanchatram, Erode, Tamil Nadu 638004"
-              link={data.map}
-            />
+              <PremiumCard
+                index={4}
+                icon={<FaFacebookF />}
+                title="Facebook"
+                subtitle={data.facebook.name}
+                link={data.facebook.link}
+              />
 
-            <PremiumCard
-              index={1}
-              icon={<FaEnvelope />}
-              title="Email"
-              subtitle={data.email}
-              link={`mailto:${data.email}`}
-            />
+              <PremiumCard
+                index={5}
+                icon={<FaYoutube />}
+                title="YouTube"
+                subtitle={data.youtube.name}
+                link={data.youtube.link}
+              />
 
-            <PremiumCard
-              index={2}
-              icon={<FaWhatsapp />}
-              title="WhatsApp"
-              subtitle="+91 70101 00073"
-              link={`https://wa.me/91${data.whatsapp}`}
-            />
+              <PremiumCard
+                index={6}
+                icon={<FaGlobe />}
+                title="Website"
+                subtitle="www.kalloviyam.com"
+                link={data.website}
+              />
 
-            <PremiumCard
-              index={3}
-              icon={<FaInstagram />}
-              title="Instagram"
-              subtitle={data.instagram.name}
-              link={data.instagram.link}
-            />
+              <PremiumCard
+                index={7}
+                icon={<FaMapMarkerAlt />}
+                title="Direction"
+                subtitle="Click To View Direction"
+                link={data.map}
+              />
+            </div>
 
-            <PremiumCard
-              index={4}
-              icon={<FaFacebookF />}
-              title="Facebook"
-              subtitle={data.facebook.name}
-              link={data.facebook.link}
-            />
-
-            <PremiumCard
-              index={5}
-              icon={<FaYoutube />}
-              title="YouTube"
-              subtitle={data.youtube.name}
-              link={data.youtube.link}
-            />
-
-            <PremiumCard
-              index={6}
-              icon={<FaGlobe />}
-              title="Website"
-              subtitle="www.kalloviyam.com"
-              link={data.website}
-            />
-
-            <PremiumCard
-              index={7}
-              icon={<FaMapMarkerAlt />}
-              title="Direction"
-              subtitle="Click To View Direction"
-              link={data.map}
-            />
-          </div>
-
-          {/* BUTTONS */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 2.5,
-            }}
-            className="grid grid-cols-2 gap-4 mt-10"
-          >
-            <button
-              onClick={saveContact}
-              className="
+            {/* BUTTONS */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: 2.5,
+              }}
+              className="grid grid-cols-2 gap-4 mt-10"
+            >
+              <button
+                onClick={saveContact}
+                className="
                 h-14
                 rounded-2xl
                 bg-gradient-to-r
@@ -470,13 +493,13 @@ to-[#B0895A]
                 transition
                 duration-300
               "
-            >
-              Save Contact
-            </button>
+              >
+                Add Contact
+              </button>
 
-            <button
-              onClick={shareProfile}
-              className="
+              <button
+                onClick={shareProfile}
+                className="
                 h-14
                 rounded-2xl
                 border
@@ -494,29 +517,28 @@ to-[#B0895A]
                 transition
                 duration-300
               "
-            >
-              <FaShareAlt />
-              Share
-            </button>
-          </motion.div>
+              >
+                <FaShareAlt />
+                Share
+              </button>
+            </motion.div>
 
-          {/* Footer */}
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 3,
-            }}
-            className="text-center mt-14"
-          >
-          </motion.div>
-        </div>
-      </motion.main>
-)}
+            {/* Footer */}
+            <motion.div
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                delay: 3,
+              }}
+              className="text-center mt-14"
+            ></motion.div>
+          </div>
+        </motion.main>
+      )}
     </>
   );
 }
