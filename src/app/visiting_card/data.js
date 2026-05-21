@@ -1,8 +1,9 @@
 //src/app/visiting_card/data.js
 const data = {
   company: "Kalloviyam",
-  owner: "Gogul V",
-  role: "Registered Engineer DTCP",
+  owner: "Er.Gogul V",
+  role1: "Registered Engineer DTCP,",
+  role2: "Erode Corporation",
 degree: "B.E., PGDQSV.,",
 
   phone: "7010100073",

@@ -190,83 +190,55 @@ export default function VisitingCardClient() {
                 />
               </motion.div>
 
-              {/* Brand */}
-              <motion.h1
+              {/* Brand Statement */}
+              <motion.div
                 initial={{
                   opacity: 0,
                   y: 40,
-                  letterSpacing: "18px",
                 }}
                 animate={{
                   opacity: 1,
                   y: 0,
-                  letterSpacing: "8px",
                 }}
                 transition={{
                   delay: 0.5,
                   duration: 1.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="
-            mt-14
-            text-[40px]
-            md:text-[52px]
-            leading-none
-           text-[#1F2937]
-            font-light
-          "
-                style={{
-                  fontFamily: cormorant.style.fontFamily,
-                }}
+                className="mt-14 max-w-[340px] mx-auto"
               >
-                KALLOVIYAM
-              </motion.h1>
+                <h1
+                  className="
+      text-[34px]
+      md:text-[42px]
+      leading-[1.3]
+      text-[#1F2937]
+      font-medium
+      tracking-[1px]
+    "
+                  style={{
+                    fontFamily: cormorant.style.fontFamily,
+                  }}
+                >
+                  Kalloviyam – The Breathable Homes
+                </h1>
 
-              {/* Welcome */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: 1.4,
-                  duration: 1.4,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mt-8"
-              >
                 <p
                   className="
-              text-[#C6A16E]
-              text-[15px]
-              tracking-[6px]
-              uppercase
-              font-medium
-            "
+      mt-6
+      text-[#8B7355]
+      text-[14px]
+      md:text-[15px]
+      leading-8
+      tracking-[1.5px]
+      font-medium
+    "
                   style={{
                     fontFamily: montserrat.style.fontFamily,
                   }}
                 >
-                  Welcome To
-                </p>
-
-                <p
-                  className="
-              text-[#1F2937]
-              text-[24px]
-              tracking-[3px]
-              mt-3
-              font-light
-            "
-                  style={{
-                    fontFamily: montserrat.style.fontFamily,
-                  }}
-                >
-                  Kalloviyam Constructions
+                  A firm specializing in eco-friendly and sustainable home
+                  construction.
                 </p>
               </motion.div>
             </div>
@@ -357,7 +329,7 @@ export default function VisitingCardClient() {
               <div className="mt-6 flex items-baseline justify-center gap-2 flex-wrap">
                 <h2
                   className="
-      text-[52px]
+      text-[45px]
       leading-none
       font-semibold
       tracking-wide
@@ -388,10 +360,20 @@ export default function VisitingCardClient() {
                 </span>
               </div>
               {/* Role */}
-              <p className="text-[#C6A16E] mt-3 text-sm tracking-[4px] uppercase">
-                {data.role}
-              </p>
+              <p
+                className="
+    text-[#C6A16E]
+    mt-5
+    text-[14px]
+    tracking-[4px]
+    uppercase
+    leading-[2.2]
+  "
+              >
+                <span className="block">{data.role1}</span>
 
+                <span className="block mt-0">{data.role2}</span>
+              </p>
               {/* Divider */}
               <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#C6A16E] to-transparent mx-auto mt-8" />
             </motion.div>

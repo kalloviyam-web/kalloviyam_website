@@ -4,13 +4,22 @@ export async function GET() {
   const vCard = `
 BEGIN:VCARD
 VERSION:3.0
-FN:${data.owner}
-ORG:${data.company}
-TITLE:${data.role}
+
+FN:Engineer Gogul V Kalloviyam
+
+N:Gogul V;;;Engineer;
+
+ORG:Kalloviyam - The Breathable Homes
+
 TEL;TYPE=CELL:${data.phone}
+
 EMAIL:${data.email}
+
 URL:${data.website}
+
 ADR:;;${data.address};;;;
+
+
 END:VCARD
 `;
 
@@ -20,8 +29,7 @@ END:VCARD
     headers: {
       "Content-Type": "text/vcard; charset=utf-8",
 
-      // IMPORTANT
-      "Content-Disposition": `inline; filename="${data.owner}.vcf"`,
+      "Content-Disposition": `attachment; filename="Engineer Gogul V Kalloviyam.vcf"`,
 
       "Cache-Control": "no-store",
     },
