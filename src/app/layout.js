@@ -24,6 +24,12 @@ const cormorant = Cormorant_Garamond({
 export const metadata = {
   title: "Kalloviyam",
   description: "Construction Company Website",
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
