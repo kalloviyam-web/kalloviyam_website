@@ -535,6 +535,8 @@ lg:h-screen
                 lg:pt-[68px]
 
                 bg-[#F4F0EA]
+                overflow-hidden
+relative
               "
             >
               <div
@@ -576,7 +578,7 @@ lg:h-screen
               lg:h-screen
 
               pt-12
-              lg:pt-[68px]
+              lg:pt-[160px]
 
               bg-[#F4F0EA]
 
@@ -591,31 +593,37 @@ lg:h-screen
             "
           >
             <div
-              className="
-                w-full
-
-                max-w-[1200px]
-
-                rounded-[10px]
-
-                overflow-hidden
-
-                bg-[#F4F0EA]
-
-                shadow-[0_10px_35px_rgba(0,0,0,0.05)]
-              "
-            >
-              <div className="aspect-video">
-                <iframe
-                  src={embedUrl}
-                  title={project.projectName}
-                  allowFullScreen
-                  className="
-                    w-full
-                    h-full
-                  "
-                />
-              </div>
+  className="
+    relative
+    z-0
+    w-full
+    max-w-[1000px]
+    rounded-[10px]
+    overflow-hidden
+    bg-[#F4F0EA]
+    shadow-[0_10px_35px_rgba(0,0,0,0.05)]
+  "
+>
+              <div
+  className="
+    relative
+    aspect-video
+    overflow-hidden
+    rounded-[10px]
+    isolate
+  "
+>
+  <iframe
+    src={`${embedUrl}?rel=0&modestbranding=1&playsinline=1`}
+    className="
+        absolute
+        inset-0
+        w-full
+        h-full
+        border-0
+    "
+/>
+</div>
             </div>
           </section>
         )}
