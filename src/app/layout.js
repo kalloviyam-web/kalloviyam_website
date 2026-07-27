@@ -22,12 +22,28 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500"],
 });
 export const metadata = {
+  metadataBase: new URL("https://kalloviyam.com"),
+
   title: "Kalloviyam",
   description: "Construction Company Website",
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/favicon-32x32.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+      {
+        url: "/favicon-16x16.png",
+        type: "image/png",
+        sizes: "16x16",
+      },
+    ],
     apple: "/apple-touch-icon.png",
   },
 };
