@@ -1,8 +1,9 @@
 // src/app/projects/[slug]/page.js
 
-import { client } from "@/sanity/lib/client";
-import { singleProjectQuery } from "@/sanity/lib/queries";
+import { notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import { Cormorant_Garamond } from "next/font/google";
+import ProjectDetailClient from "@/components/projects/ProjectDetailClient";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -13,621 +14,96 @@ function getYoutubeEmbedUrl(url) {
   if (!url) return "";
 
   if (url.includes("youtu.be")) {
-    const videoId = url.split("youtu.be/")[1];
+    const videoId = url.split("youtu.be/")[1]?.split("?")[0];
     return `https://www.youtube.com/embed/${videoId}`;
   }
 
   if (url.includes("watch?v=")) {
-    return url.replace("watch?v=", "embed/");
+    const videoId = url.split("watch?v=")[1]?.split("&")[0];
+    return `https://www.youtube.com/embed/${videoId}`;
   }
 
   return url;
 }
 
-export default async function ProjectDetailsPage({
-  params,
-}) {
+// Generate dynamic hidden SEO meta tags in <head>
+export async function generateMetadata({ params }) {
   const { slug } = await params;
+  const supabase = await createClient();
 
-  const project = await client.fetch(
-    singleProjectQuery,
-    { slug }
-  );
+  const { data: project } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
   if (!project) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F4F0EA]">
-        Project not found
-      </div>
-    );
+    return {
+      title: "Project Not Found | Kalloviyam",
+    };
   }
 
-  const embedUrl =
-    project.videoUrl &&
-    getYoutubeEmbedUrl(project.videoUrl);
+  const title =
+    project.meta_title || `${project.project_name} | Kalloviyam Constructions`;
+  const description =
+    project.meta_description ||
+    project.description?.slice(0, 160) ||
+    "Sustainable and breathable architecture crafted by Kalloviyam.";
+  const coverImage = project.gallery_images?.[0]?.imageUrl;
 
-  const heroImage =
-    project.galleryImages?.[0];
+  return {
+    title,
+    description,
+    keywords: project.meta_keywords || undefined,
+    openGraph: {
+      title,
+      description,
+      url: `https://kalloviyam.com/projects/${project.slug}`,
+      siteName: "Kalloviyam",
+      images: coverImage
+        ? [
+            {
+              url: coverImage,
+              width: 1200,
+              height: 630,
+              alt: project.project_name,
+            },
+          ]
+        : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: coverImage ? [coverImage] : [],
+    },
+  };
+}
 
-  const descriptionImages =
-    project.galleryImages?.slice(1, 4);
+export const revalidate = 30;
 
-  const featureImages =
-    project.galleryImages?.slice(4, 6);
+export default async function ProjectDetailsPage({ params }) {
+  const { slug } = await params;
+  const supabase = await createClient();
 
-  const remainingImages =
-    project.galleryImages?.slice(6);
+  const { data: project, error } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !project) {
+    notFound();
+  }
+
+  const embedUrl = project.video_url && getYoutubeEmbedUrl(project.video_url);
 
   return (
-    <div
-      className="
-        w-screen
-
-        lg:h-screen
-
-        overflow-y-auto
-
-        lg:overflow-x-auto
-        lg:overflow-y-hidden
-
-        scrollbar-hide
-
-        bg-[#F4F0EA]
-      "
-    >
-      <main
-        className="
-          flex
-          flex-col
-
-          lg:flex-row
-          lg:flex-nowrap
-
-          w-full
-          lg:w-max
-
-          min-h-screen
-
-          bg-[#F4F0EA]
-          text-[#111111]
-        "
-      >
-        {/* ================================================= */}
-        {/* HERO */}
-        {/* ================================================= */}
-
-        <section
-          className="
-            w-full
-            lg:min-w-[1600px]
-
-           h-auto
-lg:h-screen
-
-            pt-[70px]
-            lg:pt-[68px]
-
-            flex
-            flex-col
-
-            lg:flex-row
-          "
-        >
-          {/* LEFT */}
-
-          <div
-            className={`
-              ${cormorant.className}
-
-              w-full
-              lg:w-[40%]
-
-              flex
-              flex-col
-              justify-start
-
-              pt-12
-              lg:pt-20
-
-              px-8
-              sm:px-12
-              lg:px-20
-            `}
-          >
-          
-            {/* TITLE */}
-
-            <h1
-              className="
-                text-[32px]
-                sm:text-[32px]
-                lg:text-[48px]
-
-                leading-[0.95]
-
-                tracking-[-0.045em]
-
-                font-normal
-
-                text-[#171717]
-
-                whitespace-nowrap
-              "
-            >
-              {project.projectName}
-            </h1>
-
-            {/* GOLDEN LINE */}
-
-            <div
-              className="
-                w-[60px]
-                h-[1px]
-
-                bg-[#B58A52]
-
-                mt-8
-                mb-10
-              "
-            />
-
-            {/* DETAILS */}
-
-            <div className="space-y-8">
-              {/* LOCATION */}
-
-              <div className="flex gap-7">
-                <p
-                  className="
-                    w-[90px]
-
-                    uppercase
-
-                    tracking-[0.32em]
-
-                    text-[12px]
-
-                    text-[#A29A90]
-                  "
-                >
-                  Location
-                </p>
-
-                <p
-                  className="
-                    text-[14px]
-                    sm:text-[18px]
-                    lg:text-[18px]
-
-                    font-normal
-
-                    text-[#1B1B1B]
-                  "
-                >
-                  {project.projectLocation}
-                </p>
-              </div>
-
-              {/* BHK */}
-
-              <div className="flex gap-7">
-                <p
-                  className="
-                    w-[90px]
-
-                    uppercase
-
-                    tracking-[0.32em]
-
-                    text-[12px]
-
-                    text-[#A29A90]
-                  "
-                >
-                  BHK
-                </p>
-
-                <p
-                  className="
-                    text-[14px]
-                    sm:text-[18px]
-                    lg:text-[18px]
-
-                    font-normal
-
-                    text-[#1B1B1B]
-                  "
-                >
-                  {project.bhk}
-                </p>
-              </div>
-
-              {/* SQFT */}
-
-              <div className="flex gap-7">
-                <p
-                  className="
-                    w-[90px]
-
-                    uppercase
-
-                    tracking-[0.32em]
-
-                    text-[12px]
-
-                    text-[#A29A90]
-                  "
-                >
-                  Sq.ft
-                </p>
-
-                <p
-                  className="
-                    text-[14px]
-                    sm:text-[18px]
-                    lg:text-[18px]
-
-                    font-normal
-
-                    text-[#1B1B1B]
-                  "
-                >
-                  {project.sqft}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* HERO IMAGE */}
-
-          <div
-            className="
-              w-full
-              lg:w-[60%]
-
-              h-[55vh]
-              lg:h-full
-
-              overflow-hidden
-
-              pl-0
-              lg:pl-12
-
-              mt-10
-              lg:mt-0
-            "
-          >
-            <img
-              src={heroImage?.imageUrl}
-              alt={project.projectName}
-              className="
-                w-full
-                h-full
-
-                object-cover
-              "
-            />
-          </div>
-        </section>
-
-        {/* ================================================= */}
-        {/* DESCRIPTION */}
-        {/* ================================================= */}
-
-        <section
-          className="
-            w-full
-            lg:min-w-[2400px]
-
-            h-auto
-lg:h-screen
-
-            pt-0
-            lg:pt-[68px]
-
-            grid
-
-            grid-cols-1
-            sm:grid-cols-2
-
-            lg:grid-cols-[1fr_1fr_1fr_0.9fr]
-          "
-        >
-          {/* IMAGES */}
-
-          {descriptionImages?.map(
-            (image, index) => (
-              <div
-                key={index}
-                className="
-                  overflow-hidden
-
-                  h-[55vh]
-                  sm:h-[70vh]
-                  lg:h-full
-                "
-              >
-                <img
-                  src={image?.imageUrl}
-                  alt=""
-                  className="
-                    w-full
-                    h-full
-
-                    object-cover
-                  "
-                />
-              </div>
-            )
-          )}
-
-          {/* DESCRIPTION */}
-
-          <div
-            className="
-              bg-[#F4F0EA]
-
-              flex
-              items-start
-              justify-center
-
-              pt-16
-              lg:pt-24
-
-              px-8
-              lg:px-14
-
-              pb-14
-            "
-          >
-            <p
-              className="
-                text-center
-
-                text-[16px]
-                lg:text-[21px]
-
-                leading-[2]
-
-                font-light
-
-                max-w-[420px]
-              "
-            >
-              {project.description}
-            </p>
-          </div>
-        </section>
-
-        {/* ================================================= */}
-        {/* FEATURES */}
-        {/* ================================================= */}
-
-        <section
-          className="
-            w-full
-            lg:min-w-[2400px]
-
-            h-auto
-            lg:h-screen
-
-            pt-0
-            lg:pt-[68px]
-
-            grid
-
-            grid-cols-1
-            sm:grid-cols-2
-
-            lg:grid-cols-[1fr_1fr_0.9fr]
-          "
-        >
-          {/* FEATURE IMAGES */}
-
-          {featureImages?.map(
-            (image, index) => (
-              <div
-                key={index}
-                className="
-                  overflow-hidden
-
-                  h-[55vh]
-                  sm:h-[70vh]
-                  lg:h-full
-                "
-              >
-                <img
-                  src={image?.imageUrl}
-                  alt=""
-                  className="
-                    w-full
-                    h-full
-
-                    object-cover
-                  "
-                />
-              </div>
-            )
-          )}
-
-          {/* FEATURES */}
-
-          <div
-            className="
-              bg-[#F4F0EA]
-
-              flex
-              flex-col
-              justify-start
-
-              pt-16
-              lg:pt-20
-
-              px-8
-              lg:px-16
-
-              pb-16
-            "
-          >
-            <p
-              className="
-                uppercase
-
-                tracking-[0.28em]
-
-                text-[12px]
-
-                text-[#B58A52]
-
-                mb-8
-              "
-            >
-              Features
-            </p>
-
-            <div className="space-y-5">
-              {project.features?.map(
-                (feature, index) => (
-                  <div
-                    key={index}
-                    className="
-                      border-b
-                      border-[#D8D0C5]
-
-                      pb-5
-                    "
-                  >
-                    <p
-                      className="
-                        text-[16px]
-                        lg:text-[19px]
-
-                        leading-[1.9]
-
-                        font-light
-                      "
-                    >
-                      {feature}
-                    </p>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================= */}
-        {/* REMAINING IMAGES */}
-        {/* ================================================= */}
-
-        {remainingImages?.map(
-          (image, index) => (
-            <section
-              key={index}
-              className="
-                w-full
-                lg:min-w-[1500px]
-
-                h-auto
-                lg:h-screen
-
-                pt-0
-                lg:pt-[68px]
-
-                bg-[#F4F0EA]
-                overflow-hidden
-relative
-              "
-            >
-              <div
-                className="
-                  w-full
-
-                  h-auto
-                  lg:h-full
-
-                  overflow-hidden
-                "
-              >
-                <img
-                  src={image?.imageUrl}
-                  alt=""
-                  className="
-                    w-full
-                    h-full
-
-                    object-cover
-                  "
-                />
-              </div>
-            </section>
-          )
-        )}
-
-        {/* ================================================= */}
-        {/* VIDEO */}
-        {/* ================================================= */}
-
-        {embedUrl && (
-          <section
-            className="
-              w-full
-              lg:min-w-[1350px]
-
-              h-auto
-              lg:h-screen
-
-              pt-12
-              lg:pt-[160px]
-
-              bg-[#F4F0EA]
-
-              flex
-              items-center
-              justify-center
-
-              px-6
-              lg:px-16
-
-              pb-16
-            "
-          >
-            <div
-  className="
-    relative
-    z-0
-    w-full
-    max-w-[1000px]
-    rounded-[10px]
-    overflow-hidden
-    bg-[#F4F0EA]
-    shadow-[0_10px_35px_rgba(0,0,0,0.05)]
-  "
->
-              <div
-  className="
-    relative
-    aspect-video
-    overflow-hidden
-    rounded-[10px]
-    isolate
-  "
->
-  <iframe
-    src={`${embedUrl}?rel=0&modestbranding=1&playsinline=1`}
-    className="
-        absolute
-        inset-0
-        w-full
-        h-full
-        border-0
-    "
-/>
-</div>
-            </div>
-          </section>
-        )}
-      </main>
-    </div>
+    <ProjectDetailClient
+      project={project}
+      embedUrl={embedUrl}
+      fontClassName={cormorant.className}
+    />
   );
 }

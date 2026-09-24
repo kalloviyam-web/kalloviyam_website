@@ -17,26 +17,25 @@ const Footer = dynamic(() => import("./Footer"), {
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
 
-  const isStudio = pathname.startsWith("/studio");
-
+  const isAdmin = pathname.startsWith("/admin");
   const isVisitingCard = pathname === "/visiting_card";
 
   return (
     <>
       {/* Navbar */}
-      {!isStudio && !isVisitingCard && <Navbar />}
+      {!isAdmin && !isVisitingCard && <Navbar />}
 
       {/* Page Content */}
-      <main>{children}</main>
+      <div className="w-full">{children}</div>
 
       {/* Footer */}
-      {!isStudio &&
+      {!isAdmin &&
         !isVisitingCard &&
         pathname !== "/" &&
         !pathname.startsWith("/projects/") && <Footer />}
 
       {/* Floating Buttons */}
-      {!isStudio && !isVisitingCard && (
+      {!isAdmin && !isVisitingCard && (
         <FloatingContactButtons />
       )}
     </>
