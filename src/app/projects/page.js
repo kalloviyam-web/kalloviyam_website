@@ -24,19 +24,21 @@ export default async function ProjectsPage() {
       className="
         bg-[#F8F7F4]
         min-h-screen
-        pt-[95px]
-        sm:pt-[100px]
-        md:pt-[110px]
+        pt-[90px]
+        sm:pt-[96px]
+        md:pt-[102px]
         pb-10
+        sm:pb-12
         md:pb-16
       "
     >
       <div
         className="
           w-full
-          px-5
-          sm:px-5
-          lg:px-10
+          px-4
+          sm:px-6
+          lg:px-8
+          xl:px-10
         "
       >
         {/* PROJECTS GRID */}
@@ -46,12 +48,10 @@ export default async function ProjectsPage() {
             grid-cols-1
             sm:grid-cols-2
             lg:grid-cols-4
-            gap-3
-            sm:gap-4
-            lg:gap-4
+            gap-1.5
+            sm:gap-2
+            lg:gap-2.5
             overflow-hidden
-            mt-2
-            sm:mt-4
           "
         >
           {projects && projects.length > 0 ? (
@@ -90,29 +90,43 @@ export default async function ProjectsPage() {
                         h-full
                         object-cover
                         transition-all
-                        duration-[1600ms]
+                        duration-[1400ms]
                         ease-out
-                        group-hover:scale-110
+                        group-hover:scale-105
                       "
                     />
 
-                    {/* DARK OVERLAY */}
+                    {/* BASE MINUTE BLACK SHADE (Always subtle for depth & elegance) */}
+                    <div
+                      className="
+                        absolute
+                        inset-0
+                        bg-black/20
+                        bg-gradient-to-t
+                        from-black/45
+                        via-black/15
+                        to-black/5
+                        pointer-events-none
+                        transition-opacity
+                        duration-500
+                      "
+                    />
+
+                    {/* HOVER / ACTIVE DARK OVERLAY (Deepens on hover to make text crystal clear) */}
                     <div
                       className="
                         absolute
                         inset-0
                         bg-gradient-to-t
-                        from-black/85
-                        via-black/40
-                        to-transparent
-                        lg:from-black/60
-                        lg:via-black/30
-                        lg:to-transparent
-                        opacity-90
+                        from-black/90
+                        via-black/55
+                        to-black/10
+                        opacity-85
                         lg:opacity-0
                         lg:group-hover:opacity-100
                         transition-all
                         duration-500
+                        pointer-events-none
                       "
                     />
 
@@ -124,8 +138,8 @@ export default async function ProjectsPage() {
                         flex
                         flex-col
                         justify-end
-                        p-5
-                        sm:p-6
+                        p-4
+                        sm:p-5
                       "
                     >
                       {/* DESKTOP & LAPTOP HOVER VIEW (Hidden by default, shown on mouse hover) */}
