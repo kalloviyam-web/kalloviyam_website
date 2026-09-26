@@ -1,8 +1,20 @@
 // src/app/projects/page.js
+/* eslint-disable @next/next/no-img-element */
 
 import Link from "next/link";
+import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { createClient } from "@/lib/supabase/server";
 import { getOptimizedImageUrl } from "@/utils/cloudinary";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const revalidate = 30;
 
@@ -14,10 +26,46 @@ export const metadata = {
 
 export default async function ProjectsPage() {
   const supabase = await createClient();
-  const { data: projects = [] } = await supabase
-    .from("projects")
-    .select("*")
-    .order("created_at", { ascending: false });
+  
+  let rawProjects = [];
+  try {
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*")
+      .order("display_order", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: false });
+    
+    if (error) {
+      // Fallback if display_order column isn't created in Supabase yet
+      const fallback = await supabase
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending: false });
+      rawProjects = fallback.data || [];
+    } else {
+      rawProjects = data || [];
+    }
+  } catch (err) {
+    const fallback = await supabase
+      .from("projects")
+      .select("*")
+      .order("created_at", { ascending: false });
+    rawProjects = fallback.data || [];
+  }
+
+  // Resilient JS sorting ensuring strict display_order placement
+  const projects = [...rawProjects].sort((a, b) => {
+    const orderA =
+      typeof a.display_order === "number" && !isNaN(a.display_order)
+        ? a.display_order
+        : Infinity;
+    const orderB =
+      typeof b.display_order === "number" && !isNaN(b.display_order)
+        ? b.display_order
+        : Infinity;
+    if (orderA !== orderB) return orderA - orderB;
+    return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+  });
 
   return (
     <section
@@ -160,23 +208,31 @@ export default async function ProjectsPage() {
                       >
                         {/* PROJECT NAME */}
                         <h2
-                          className="
+                          className={`
+                            ${cormorant.className}
                             text-white
-                            text-[22px]
+                            text-[19px]
                             leading-[1.2]
-                            font-[400]
-                            tracking-[1px]
-                          "
-                          style={{
-                            fontFamily: "serif",
-                          }}
+                            font-[500]
+                            tracking-[0.6px]
+                          `}
                         >
                           {project.project_name}
                         </h2>
 
                         {/* TAGLINE (if available) */}
                         {project.tagline && (
-                          <p className="text-[#D7B27A] text-[12px] font-medium tracking-wide mt-1.5 line-clamp-2">
+                          <p
+                            className={`
+                              ${montserrat.className}
+                              text-[#D7B27A]
+                              text-[11px]
+                              font-medium
+                              tracking-[0.2px]
+                              mt-1
+                              line-clamp-2
+                            `}
+                          >
                             {project.tagline}
                           </p>
                         )}
@@ -184,14 +240,15 @@ export default async function ProjectsPage() {
                         {/* LOCATION */}
                         {project.project_location && (
                           <p
-                            className="
-                              text-white/75
+                            className={`
+                              ${montserrat.className}
+                              text-white/80
                               uppercase
-                              tracking-[2.5px]
-                              text-[10px]
+                              tracking-[2px]
+                              text-[9px]
                               font-medium
-                              mt-2
-                            "
+                              mt-1.5
+                            `}
                           >
                             {project.project_location}
                           </p>
@@ -209,24 +266,33 @@ export default async function ProjectsPage() {
                       >
                         {/* PROJECT NAME */}
                         <h2
-                          className="
+                          className={`
+                            ${cormorant.className}
                             text-white
-                            text-[19px]
-                            sm:text-[21px]
+                            text-[17px]
+                            sm:text-[18px]
                             leading-[1.2]
-                            font-[400]
-                            tracking-[1px]
-                          "
-                          style={{
-                            fontFamily: "serif",
-                          }}
+                            font-[500]
+                            tracking-[0.6px]
+                          `}
                         >
                           {project.project_name}
                         </h2>
 
                         {/* TAGLINE (if available) */}
                         {project.tagline && (
-                          <p className="text-[#D7B27A] text-[11px] sm:text-[12px] font-medium tracking-wide mt-1 line-clamp-2">
+                          <p
+                            className={`
+                              ${montserrat.className}
+                              text-[#D7B27A]
+                              text-[10.5px]
+                              sm:text-[11px]
+                              font-medium
+                              tracking-[0.2px]
+                              mt-1
+                              line-clamp-2
+                            `}
+                          >
                             {project.tagline}
                           </p>
                         )}
@@ -234,14 +300,16 @@ export default async function ProjectsPage() {
                         {/* LOCATION */}
                         {project.project_location && (
                           <p
-                            className="
-                              text-white/75
+                            className={`
+                              ${montserrat.className}
+                              text-white/80
                               uppercase
-                              tracking-[2px]
-                              text-[10px]
+                              tracking-[1.8px]
+                              text-[8.5px]
+                              sm:text-[9px]
                               font-medium
-                              mt-1.5
-                            "
+                              mt-1
+                            `}
                           >
                             {project.project_location}
                           </p>

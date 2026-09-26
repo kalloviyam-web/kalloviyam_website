@@ -28,15 +28,18 @@ create table if not exists public.projects (
   meta_title text default '',
   meta_description text default '',
   meta_keywords text default '',
+  display_order integer default 0,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- 2.1 Ensure column exists if table was previously created
+-- 2.1 Ensure columns exist if table was previously created
 alter table public.projects add column if not exists tagline text default '';
+alter table public.projects add column if not exists display_order integer default 0;
 
 -- 3. Create Indexes for High Performance Querying
 create index if not exists idx_projects_slug on public.projects(slug);
+create index if not exists idx_projects_display_order on public.projects(display_order asc);
 create index if not exists idx_projects_created_at on public.projects(created_at desc);
 create index if not exists idx_projects_listing_type on public.projects(listing_type);
 

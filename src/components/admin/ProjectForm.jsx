@@ -276,6 +276,10 @@ export default function ProjectForm({ initialData = null, isEdit = false }) {
         description.slice(0, 160).trim() ||
         "Kalloviyam - Sustainable & Breathable Homes.",
       meta_keywords: metaKeywords.trim(),
+      display_order:
+        typeof initialData?.display_order === "number"
+          ? initialData.display_order
+          : 0,
     };
 
     try {
@@ -321,15 +325,18 @@ export default function ProjectForm({ initialData = null, isEdit = false }) {
         saveError = res.error;
       }
 
-      // Automatic Fallback: If 'tagline' column doesn't exist in Supabase yet, retry without tagline
+      // Automatic Fallback: If 'tagline' or 'display_order' column doesn't exist in Supabase yet, retry without them
       if (
         saveError &&
         (saveError.message?.toLowerCase().includes("tagline") ||
+          saveError.message?.toLowerCase().includes("display_order") ||
           saveError.details?.toLowerCase().includes("tagline") ||
+          saveError.details?.toLowerCase().includes("display_order") ||
           saveError.hint?.toLowerCase().includes("tagline") ||
+          saveError.hint?.toLowerCase().includes("display_order") ||
           saveError.message?.includes("schema cache"))
       ) {
-        const { tagline: _t, ...fallbackPayload } = projectPayload;
+        const { tagline: _t, display_order: _do, ...fallbackPayload } = projectPayload;
         if (isEdit && initialData?.id) {
           const res = await supabase
             .from("projects")
