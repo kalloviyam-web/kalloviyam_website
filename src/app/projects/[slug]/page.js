@@ -55,6 +55,9 @@ export async function generateMetadata({ params }) {
     title,
     description,
     keywords: project.meta_keywords || undefined,
+    alternates: {
+      canonical: `https://kalloviyam.com/projects/${project.slug}`,
+    },
     openGraph: {
       title,
       description,
@@ -99,11 +102,33 @@ export default async function ProjectDetailsPage({ params }) {
 
   const embedUrl = project.video_url && getYoutubeEmbedUrl(project.video_url);
 
+  // Schema.org Structured Data for Google Rich Results
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: project.project_name,
+    description: project.meta_description || project.description,
+    image: project.gallery_images?.map((img) => img.imageUrl) || [],
+    address: project.project_location
+      ? {
+          "@type": "PostalAddress",
+          addressLocality: project.project_location,
+          addressCountry: "IN",
+        }
+      : undefined,
+  };
+
   return (
-    <ProjectDetailClient
-      project={project}
-      embedUrl={embedUrl}
-      fontClassName={cormorant.className}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProjectDetailClient
+        project={project}
+        embedUrl={embedUrl}
+        fontClassName={cormorant.className}
+      />
+    </>
   );
 }

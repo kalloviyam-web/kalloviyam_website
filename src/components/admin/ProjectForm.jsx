@@ -11,8 +11,6 @@ import {
   X,
   Plus,
   Trash2,
-  MoveLeft,
-  MoveRight,
   Globe,
   Sparkles,
   Save,
@@ -24,6 +22,7 @@ import {
   Star,
   ChevronLeft,
   ChevronRight,
+  GripVertical,
 } from "lucide-react";
 
 export default function ProjectForm({ initialData = null, isEdit = false }) {
@@ -122,14 +121,51 @@ export default function ProjectForm({ initialData = null, isEdit = false }) {
     setFeatures(features.filter((_, i) => i !== index));
   };
 
-  // Image Reordering
-  const moveImage = (index, direction) => {
-    const nextIndex = direction === "left" ? index - 1 : index + 1;
-    if (nextIndex < 0 || nextIndex >= galleryImages.length) return;
+  // Drag & Drop Reordering States
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+
+  // Drag and Drop handlers
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", index.toString());
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDragLeave = (e, index) => {
+    if (dragOverIndex === index) {
+      setDragOverIndex(null);
+    }
+  };
+
+  const handleDrop = (e, targetIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === undefined) return;
+    if (draggedIndex === targetIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
     const updated = [...galleryImages];
-    const [moved] = updated.splice(index, 1);
-    updated.splice(nextIndex, 0, moved);
+    const [moved] = updated.splice(draggedIndex, 1);
+    updated.splice(targetIndex, 0, moved);
     setGalleryImages(updated);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   // Set As Cover Image (moves the selected image to index 0 without duplicate upload)
@@ -866,99 +902,109 @@ export default function ProjectForm({ initialData = null, isEdit = false }) {
               </div>
             )}
 
-            {/* Gallery Thumbnails & Reordering */}
+            {/* Gallery Thumbnails & Drag-and-Drop Reordering */}
             {galleryImages.length > 0 && (
               <div className="mt-8">
-                <h3 className="text-xs uppercase tracking-[1.5px] font-semibold text-[#555] mb-4">
-                  Manage Image Order & Cover
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {galleryImages.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className={`relative group rounded-xl overflow-hidden border bg-black aspect-[4/3] ${
-                        idx === 0
-                          ? "border-[#4F6743] ring-2 ring-[#4F6743]/50 shadow-md"
-                          : "border-[#E8E2D8]"
-                      }`}
-                    >
-                      <img
-                        src={img.imageUrl}
-                        alt={`Gallery ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                      />
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-2 border-b border-[#F0EBE1]">
+                  <div>
+                    <h3 className="text-xs uppercase tracking-[1.5px] font-semibold text-[#555]">
+                      Manage Image Order & Cover
+                    </h3>
+                    <p className="text-xs text-[#8C8275] mt-0.5">
+                      ✦ <strong>Drag and drop</strong> images to reorder. Image <strong>#1</strong> is automatically your main cover.
+                    </p>
+                  </div>
+                  <span className="text-xs text-[#8C8275] font-mono bg-[#FAF8F5] px-2.5 py-1 rounded-md border border-[#E8E2D8] self-start sm:self-auto">
+                    {galleryImages.length} {galleryImages.length === 1 ? "Image" : "Images"}
+                  </span>
+                </div>
 
-                      {/* Cover Badge */}
-                      {idx === 0 ? (
-                        <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#4F6743] text-white text-[10px] font-semibold tracking-wider shadow-sm flex items-center gap-1">
-                          <Star size={10} className="fill-white" />
-                          COVER
-                        </div>
-                      ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {galleryImages.map((img, idx) => {
+                    const isDragging = draggedIndex === idx;
+                    const isDragOver = dragOverIndex === idx && draggedIndex !== idx;
+
+                    return (
+                      <div
+                        key={img.publicId || `${img.imageUrl}_${idx}`}
+                        draggable={true}
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragOver={(e) => handleDragOver(e, idx)}
+                        onDragLeave={(e) => handleDragLeave(e, idx)}
+                        onDrop={(e) => handleDrop(e, idx)}
+                        onDragEnd={handleDragEnd}
+                        className={`relative group rounded-xl overflow-hidden border aspect-[4/3] cursor-grab active:cursor-grabbing select-none transition-all duration-200 ${
+                          isDragging
+                            ? "opacity-30 scale-95 border-dashed border-[#4F6743] ring-2 ring-[#4F6743]/50 bg-[#FAF8F5]"
+                            : isDragOver
+                            ? "scale-105 ring-3 ring-[#4F6743] border-[#4F6743] shadow-xl z-20"
+                            : idx === 0
+                            ? "border-[#4F6743] ring-2 ring-[#4F6743]/50 shadow-md bg-black"
+                            : "border-[#E8E2D8] hover:border-[#4F6743]/70 hover:shadow-md bg-black"
+                        }`}
+                      >
+                        <img
+                          src={img.imageUrl}
+                          alt={`Gallery ${idx + 1}`}
+                          className="w-full h-full object-cover pointer-events-none"
+                        />
+
+                        {/* Top-Left Cover Badge / Set Cover Button */}
+                        {idx === 0 ? (
+                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#4F6743] text-white text-[10px] font-semibold tracking-wider shadow-md flex items-center gap-1 z-10 pointer-events-none">
+                            <Star size={10} className="fill-white" />
+                            COVER
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setAsCover(idx);
+                            }}
+                            className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/75 hover:bg-[#4F6743] text-white text-[10px] font-medium tracking-wider shadow-md transition-all flex items-center gap-1 opacity-0 group-hover:opacity-100 z-10 cursor-pointer"
+                            title="Make this the Cover Image"
+                          >
+                            <Star size={10} />
+                            Set Cover
+                          </button>
+                        )}
+
+                        {/* Top-Right Delete Action */}
                         <button
                           type="button"
-                          onClick={() => setAsCover(idx)}
-                          className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/70 hover:bg-[#4F6743] text-white text-[10px] font-medium tracking-wider shadow-sm transition-all flex items-center gap-1 opacity-0 group-hover:opacity-100"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeImage(idx);
+                          }}
+                          className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-600/90 hover:bg-red-700 text-white shadow-md transition-all opacity-0 group-hover:opacity-100 z-10 cursor-pointer"
+                          title="Delete Image"
                         >
-                          <Star size={10} />
-                          Set Cover
+                          <Trash2 size={13} />
                         </button>
-                      )}
 
-                      {/* Actions Overlay */}
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-2">
-                        <div className="flex justify-between items-center">
-                          {idx !== 0 ? (
-                            <button
-                              type="button"
-                              onClick={() => setAsCover(idx)}
-                              className="px-2 py-1 rounded bg-[#4F6743] text-white hover:bg-[#3E5234] text-[10px] font-semibold flex items-center gap-1 shadow transition-all"
-                              title="Make this the Cover Image"
-                            >
-                              <Star size={12} className="fill-white" />
-                              Set Cover
-                            </button>
-                          ) : (
-                            <span className="px-2 py-0.5 rounded bg-[#4F6743] text-white text-[10px] font-bold flex items-center gap-1">
-                              <Star size={10} className="fill-white" />
-                              Cover Active
-                            </span>
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => removeImage(idx)}
-                            className="p-1.5 rounded-lg bg-red-600/90 text-white hover:bg-red-700 transition-all"
-                            title="Delete Image"
-                          >
-                            <Trash2 size={14} />
-                          </button>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <button
-                            type="button"
-                            disabled={idx === 0}
-                            onClick={() => moveImage(idx, "left")}
-                            className="p-1 rounded bg-white/20 text-white hover:bg-white/40 disabled:opacity-20 transition-all"
-                            title="Move Left"
-                          >
-                            <MoveLeft size={14} />
-                          </button>
-                          <span className="text-[11px] font-mono text-white/80">
+                        {/* Card Bottom Indicator & Drag Grip */}
+                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none z-10">
+                          <span className="px-2 py-0.5 rounded-md bg-black/75 backdrop-blur-xs text-white text-[11px] font-mono font-medium flex items-center gap-1 shadow">
+                            <GripVertical size={12} className="text-white/70" />
                             #{idx + 1}
                           </span>
-                          <button
-                            type="button"
-                            disabled={idx === galleryImages.length - 1}
-                            onClick={() => moveImage(idx, "right")}
-                            className="p-1 rounded bg-white/20 text-white hover:bg-white/40 disabled:opacity-20 transition-all"
-                            title="Move Right"
-                          >
-                            <MoveRight size={14} />
-                          </button>
+                          {idx === 0 ? (
+                            <span className="px-1.5 py-0.5 rounded bg-[#4F6743] text-white text-[9px] font-bold shadow">
+                              MAIN
+                            </span>
+                          ) : (
+                            <span className="px-1.5 py-0.5 rounded bg-black/60 text-white/80 text-[9px] opacity-0 group-hover:opacity-100 transition-opacity">
+                              Drag to move
+                            </span>
+                          )}
                         </div>
+
+                        {/* Hover Overlay Hint */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity" />
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
